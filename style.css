@@ -1,5 +1,4 @@
-/* The blue background */
-body { 
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #1e3c72, #6a93cb);
     display: flex;
@@ -7,9 +6,9 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-}
-
-.white-container {
+    }
+    
+    .White_container {
     display: flex;
     background: white;
     border-radius: 10px;
@@ -17,28 +16,29 @@ body {
     overflow: hidden;
     width: 1154px;
     height: 600px;
-}
-
-.left-panel {
+    }
+    .left-panel {
     background: white;
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    align-content: center;
     padding: 20px;
-}
-
-.right-panel {
+    
+    }
+    .right-panel {
     width: 50%;
     padding: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.divider {
+    align-content: center;
+    
+    }
+    .divider {
     position: absolute;
     left: 50%;
     top: 15%;
@@ -46,165 +46,74 @@ body {
     width: 1px;
     background: #ccc;
     transform: translateX(-50%);
-}
-
-.login-title {
+    }
+    .login_titel {
     margin-bottom: 20px;
-    font-size: 40px; 
-    color: #0B0E2E; 
+    font-size: 20px;
+    color: #1e3c72;
+    color: #0B0E2E;
+    font-size: 40px;
     font-family: Abhaya Libre ExtraBold;
-}
-
-.inputText {
+    }
+    .inputText {
     width: 300px;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
-}
-
-#toggleIcon {
+    align-items:center;
+    justify-content: center;
+    
+    }
+    #toggleIcon {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-}
-
-#keeplogin {
-    text-align: start;  
-}
-
-.login_label {
-    color: #606060; 
-    font-family: Abhaya Libre ExtraBold; 
+    }
+    #keeplogin{
     text-align: start;
-}
-
-.login_submit {
+    }
+    
+    .login_label{
+    color: #606060;
+    font-family: Abhaya Libre ExtraBold;
+    text-align: start;
+    
+    }
+    .login_submit {
     background: #8AB2ED;
     color: rgb(0, 0, 0);
     border: none;
     font-family: Abhaya Libre ExtraBold;
     font-size: 20px;
     padding: 10px;
-    width: 300px; 
-    height: 39.37px; 
+    width: 300px;
+    height: 39.37px;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
     text-align: center;
-}
-
-button:hover {
+    }
+    button:hover {
     background: #1e3c72;
     color: rgb(255, 255, 255);
-}
-
-a {
+    }
+    a {
     display: block;
     margin-top: 15px;
     text-decoration: none;
     font-family: Abhaya Libre ExtraBold;
+    align-items: end;
     color: #1e3c72;
     font-size: 14px;
-}
-
-a:hover {
+    
+    }
+    a:hover {
     text-decoration: underline;
-}
-
-.special-outer-container {
-    width: 100%; /* Set to a percentage of the viewport width */
-    max-width: 950px; /* Maximum width */
-    height: auto; /* Height auto to fit content */
-    padding: 40px;
-    background-color: #ffffff; /* Outer container color */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center align items */
-    position: relative; /* For potential absolute positioning */
-}
-
-.special-container {
-    width: 100%;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 20px; /* Space between header and container */
-}
-
-.special-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.special-logo {
-    max-width: 15%; 
-    height: auto;
-    margin-right: 30%; /* Space between logo and title */
-}
-
-h2 {
-    font-family: Abhaya Libre ExtraBold;
-    text-align: center;
-    color: #333;
-    margin: 0; 
-}
-
-.special-form-row {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.special-form-group {
-    flex: 1;
-    margin-right: 10px;
-}
-
-.special-form-group:last-child {
-    margin-right: 0;
-}
-
-.special-form-group label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.special-readonly {
-    background-color: #f0f0f0;
-    border: none;
-}
-
-.special-button-group {
-    display: flex; /* Use flexbox for button alignment */
-    justify-content: flex-end; /* Align buttons to the right */
-    margin-top: 20px;
-    width: 100%;
-}
-
-.special-save-btn {
-    background-color: #8AB2ED;
-    color: black;
-}
-
-.special-cancel-btn {
-    background-color: #F8F8F8;
-    color: black;
-}
-
-.special-logout-btn {
-    background-color: #F2C3C4;
-    color: black;
-}
+    }
+    .logo {
+    width: 325.93px;
+    height: 264.40px
+    }
