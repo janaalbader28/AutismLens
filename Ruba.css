@@ -1,3 +1,4 @@
+/* edit profile */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #1e3c72, #6a93cb);
@@ -129,4 +130,12 @@ button {
 .special-logout-btn {
     background-color: #F2C3C4;
     color: black;
+}
+
+.special-generate-btn {
+    background-color: #8AB2ED; /* Blue */
+    color: black;
+}
+.special-generate-btn:hover {
+    background-color: #005f73; /* Darker Blue */
 }
