@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor log in - AutismLens</title>
+    <title>Doctor Log in - AutismLens</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
 </head>
 <body>
     <div class="White_container">
@@ -16,23 +15,24 @@
         <div class="divider"></div>
         <div class="right-panel">
             <h2 class="login_titel">Doctor Log in</h2>
-            <form action="#" method="post">
-                <input class="inputText" type="text" id="userId" name="userId" placeholder="User ID" required>
+            <form id="doctorLoginForm">
+                <input class="inputText" type="email" id="DoctorEmail" placeholder="Doctor Email" required>
                 <div style="position: relative;">
-                    <input class="inputText" type="password" id="password" name="password" placeholder="Password" required>
-                    <i id="toggleIcon" class="fa fa-eye" style="cursor: pointer;"></i>
+                    <input class="inputText" type="password" id="DoctorPassword" placeholder="Password" required>
+                    <i id="toggleIcon" class="fa fa-eye" style="cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);"></i>
                 </div>
-                <input type="checkbox" id="keeplogin" name="keeplogin" value="yes">
-                <label class="login_label" for="keeplogin">Keep me logged in</label><br><br>
-                <input class="login_submit" type="submit" value="Login"> 
-                
+                <input type="checkbox" id="keepLoggedIn"> Keep me logged in<br><br>
+                <input class="login_submit_doctor" type="submit" value="Login">
             </form>
-            <a href="#">Return to Log in</a>
+            <p id="loginError" style="color: red;"></p>
+            <a href="forgotPassword.html">Forgot Password?</a>
+            <a href="admin_login.html">Log in as Admin</a>
         </div>
     </div>
 
     <script>
-        const passwordField = document.getElementById('password');
+        // Fix: Select the correct password field by ID
+        const passwordField = document.getElementById('DoctorPassword');
         const toggleIcon = document.getElementById('toggleIcon');
 
         toggleIcon.addEventListener('click', () => {
@@ -46,6 +46,11 @@
                 toggleIcon.classList.add('fa-eye');
             }
         });
+
     </script>
+
+
+    
+    <script src="firebase-config.js"></script>
 </body>
 </html>

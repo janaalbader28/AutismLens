@@ -82,7 +82,7 @@ body {
     text-align: start;
     
     }
-    .login_submit {
+    .login_submit_doctor, .login_submit_admin , .ForgetPass_submit {
     background: #8AB2ED;
     color: rgb(0, 0, 0);
     border: none;
@@ -95,6 +95,8 @@ body {
     cursor: pointer;
     margin-top: 10px;
     text-align: center;
+    margin: 10px auto; 
+    display: block; 
     }
     button:hover {
     background: #1e3c72;
