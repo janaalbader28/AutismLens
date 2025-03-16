@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Homepage</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .pageContainer {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 85%;
+            height: 85%;
+        }
+
+        .pageTitle{
+            font-size: 3vw;
+            font-weight: bold;
+            font-family: Abhaya Libre ExtraBold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .profileTitle{
+            font-size: 1vw;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .column{
+            height:fit-content !important; 
+        }
+
+        .primaryBtn{
+            color: black !important;
+            background-color: #89B1EC !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .secondryBtn{
+            color: black !important;
+            background-color: #F8F8F8 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .removeBtn{
+            color: black !important;
+            background-color: #F2C3C4 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .scroll{
+            overflow-y: scroll;              
+            height: 400px !important;
+        }
+
+        .segment{
+            width: 99% !important;
+            margin-left: 5px !important;
+        }
+
+        .row{
+            padding: 5px !important;
+        }       
+    </style>
+
+</head>
+<body>
+    <div class="ui grid pageContainer">
+        <!-- Header -->
+        <div class="three wide column"> <img class="ui centered large image" src="AutismLens_Logo.png"> </div>
+        <div class="ten wide column"> <p class="pageTitle">Doctor Homepage</p> </div>
+        <div class="three wide column" style="padding-top: 3%;"> <img class="ui centered tiny image" src="Doctor_Icon.png"> <p class="profileTitle"> Dr. Shamma </p> </div>
+
+
+        <!-- Add button + Search bar -->
+        <div class="two wide column"></div>
+        <div class="six wide column">
+            <div class="primaryBtn ui animated fade button" tabindex="0">
+                <div class="visible content">Add New Patient</div>
+                <div class="hidden content"> <i class="user plus icon"></i> </div>
+            </div>
+        </div>
+        <div class="ui six wide column right aligned search">
+            <div class="ui icon input">
+                <input class="prompt" type="text" placeholder="Search patient by name..">
+                <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+        </div>
+        <div class="two wide column"></div>
+
+        <!-- list of patients -->
+        <div class="two wide column"></div>
+        <div class="twelve wide column scroll">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="ui raised segment" style="width: 100%;">
+                        <div class="paragraph">
+                            <h2 class="medium line">Sami Mohammed</h2>
+        
+                            <div class="primaryBtn ui animated fade button" tabindex="0">
+                                <div class="visible content">Previous Results</div>
+                                <div class="hidden content"> <i class="file alternate icon"></i> </div>
+                            </div>
+        
+                            <div class="removeBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Remove</div>
+                                <div class="hidden content"> <i class="user times icon"></i> </div>
+                            </div>
+        
+                            <div class="primaryBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Show Info</div>
+                                <div class="hidden content"> <i class="id card icon"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ui raised segment" style="width: 100%;">
+                        <div class="paragraph">
+                            <h2 class="medium line">Khaled Almousa</h2>
+        
+                            <div class="primaryBtn ui animated fade button" tabindex="0">
+                                <div class="visible content">Previous Results</div>
+                                <div class="hidden content"> <i class="file alternate icon"></i> </div>
+                            </div>
+        
+                            <div class="removeBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Remove</div>
+                                <div class="hidden content"> <i class="user times icon"></i> </div>
+                            </div>
+        
+                            <div class="primaryBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Show Info</div>
+                                <div class="hidden content"> <i class="id card icon"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ui raised segment" style="width: 100%;">
+                        <div class="paragraph">
+                            <h2 class="medium line">Nora Yaser</h2>
+        
+                            <div class="primaryBtn ui animated fade button" tabindex="0">
+                                <div class="visible content">Previous Results</div>
+                                <div class="hidden content"> <i class="file alternate icon"></i> </div>
+                            </div>
+        
+                            <div class="removeBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Remove</div>
+                                <div class="hidden content"> <i class="user times icon"></i> </div>
+                            </div>
+        
+                            <div class="primaryBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Show Info</div>
+                                <div class="hidden content"> <i class="id card icon"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ui raised segment" style="width: 100%;">
+                        <div class="paragraph">
+                            <h2 class="medium line">Ali Omar</h2>
+        
+                            <div class="primaryBtn ui animated fade button" tabindex="0">
+                                <div class="visible content">Previous Results</div>
+                                <div class="hidden content"> <i class="file alternate icon"></i> </div>
+                            </div>
+        
+                            <div class="removeBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Remove</div>
+                                <div class="hidden content"> <i class="user times icon"></i> </div>
+                            </div>
+        
+                            <div class="primaryBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Show Info</div>
+                                <div class="hidden content"> <i class="id card icon"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ui raised segment" style="width: 100%;">
+                        <div class="paragraph">
+                            <h2 class="medium line">Rana Yousef</h2>
+        
+                            <div class="primaryBtn ui animated fade button" tabindex="0">
+                                <div class="visible content">Previous Results</div>
+                                <div class="hidden content"> <i class="file alternate icon"></i> </div>
+                            </div>
+        
+                            <div class="removeBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Remove</div>
+                                <div class="hidden content"> <i class="user times icon"></i> </div>
+                            </div>
+        
+                            <div class="primaryBtn ui animated fade right floated button" tabindex="0">
+                                <div class="visible content">Show Info</div>
+                                <div class="hidden content"> <i class="id card icon"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two wide column"></div>
+
+        <div class="sixteen wide column"></div>
+    </div>
+    
+</body>
+</html>

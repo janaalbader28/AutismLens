@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Results</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .pageContainer {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 85%;
+            height: 85%;
+        }
+
+        .pageTitle{
+            font-size: 3vw;
+            font-weight: bold;
+            font-family: Abhaya Libre ExtraBold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .column{
+            height:fit-content !important; 
+        }
+
+        .primaryBtn{
+            color: black !important;
+            background-color: #89B1EC !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .secondryBtn{
+            color: black !important;
+            background-color: #d7d7d7 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .removeBtn{
+            color: black !important;
+            background-color: #F2C3C4 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .resultsGrid{
+            overflow-y: scroll;              
+            height: 470px !important;
+        }
+
+        .segment{
+            width: 99% !important;
+            margin-left: 5px !important;
+        }
+
+        .row{
+            padding: 2px !important;
+        }
+
+        .grid{
+            margin-top: 0px !important;
+            margin-bottom: 5px !important;
+        }
+        
+        .circle{
+            border-radius: 180px;
+            height: 8vw;
+            width: 8vw;
+        } 
+        
+        .resultTitles{
+            font-weight: bold;
+        }
+
+        .resultDesc{
+            color: #8A8A8A;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="ui grid pageContainer">
+        <!-- Header -->
+        <div class="three wide column"> <img class="ui centered large image" src="AutismLens_Logo.png"> </div>
+        <div class="ten wide column"> <p class="pageTitle">Previous Results</p> </div>
+        <div class="three wide column"></div>
+
+        <!-- list of previous results -->
+        <div class="two wide column"></div>
+        <div class="twelve wide column resultsGrid">
+            <div class="ui grid">
+                <div class="row">
+                    <div class="ui raised segment grid">
+                        <div class="three wide column"> <img class="ui circle image" src="patient_image1.png"> </div>
+                        <div class="six wide column"> 
+                            <p class="resultTitles"> Result: </p>
+                            <p class="resultDesc"> <strong>Diagnosis:</strong> Autism Spectrum Disorder (ASD) </p>
+                            <p class="resultDesc"> <strong>The Grad-CAM</strong> results highlight critical areas of the face that influenced the model's prediction.</p>
+
+                        </div>
+                        <div class="four wide column">
+                            <p class="resultTitles"> Date: </p>
+                            <p class="resultDesc"> 20/04/2024 </p>
+
+                        </div>
+                        <div class="three wide column">
+                            <p class="resultTitles"> Age: </p>
+                            <p class="resultDesc"> 9 </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="ui raised segment grid">
+                        <div class="three wide column"> <img class="ui circle image" src="patient_image2.png"> </div>
+                        <div class="six wide column"> 
+                            <p class="resultTitles"> Result: </p>
+                            <p class="resultDesc"> <strong>Diagnosis:</strong> Autism Spectrum Disorder (ASD) </p>
+                            <p class="resultDesc"> <strong>The Grad-CAM</strong> results highlight critical areas of the face that influenced the model's prediction.</p>
+
+                        </div>
+                        <div class="four wide column">
+                            <p class="resultTitles"> Date: </p>
+                            <p class="resultDesc"> 20/04/2019 </p>
+
+                        </div>
+                        <div class="three wide column">
+                            <p class="resultTitles"> Age: </p>
+                            <p class="resultDesc"> 4 </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="two wide column"></div>
+
+        <div class="sixteen wide column">
+            <div class="secondryBtn ui animated fade right floated button" tabindex="0">
+                <div class="visible content">Back</div>
+                <div class="hidden content"> <i class="arrow circle left icon"></i> </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
