@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png">
+    <link rel="stylesheet" href="ruba.css">
+    <style>
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .upload-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .upload-box {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px dashed #ccc;
+            cursor: pointer;
+            position: relative;
+        }
+        .upload-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+        .upload-box input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .divider {
+            width: 2px;
+            background-color: #ccc;
+            height: 100%;
+            margin: 0 20px;
+        }
+        .form-section {
+            flex: 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="special-outer-container">
+        <div class="special-header">
+            <img src="images/logo.png" alt="AutismLens Logo" class="special-logo"> 
+            <h2>Add New Patient</h2>
+        </div>
+        <div class="special-container">
+            <div class="content-wrapper">
+                <div class="upload-section">
+                    <div class="upload-box" onclick="document.getElementById('fileInput').click();">
+                        <img id="uploadedImage" src="" alt="">
+                        <input type="file" id="fileInput" accept="image/*" onchange="previewImage(event)">
+                    </div>
+                </div>
+                <div class="divider"></div>
+                <div class="form-section">
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>First Name:</label>
+                            <input type="text" placeholder="Enter the first name">
+                        </div>
+                        <div class="special-form-group">
+                            <label>Last Name:</label>
+                            <input type="text" placeholder="Enter the last name">
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>Gender:</label>
+                            <select>
+                                <option>Select the gender</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="special-form-group">
+                            <label>National ID (NID):</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>Age:</label>
+                            <input type="text" class="special-readonly" disabled>
+                        </div>
+                        <div class="special-form-group">
+                            <label>Birth Date:</label>
+                            <input type="date">
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>Phone No.:</label>
+                            <input type="text">
+                        </div>
+                        <div class="special-form-group">
+                            <label>Additional Phone No.:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+                    <div class="special-button-group">
+                        <button class="special-cancel-btn">Cancel</button>
+                        <button class="special-save-btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imgElement = document.getElementById('uploadedImage');
+                    imgElement.src = e.target.result;
+                    imgElement.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+<script type="module" src="firebase-config.js"></script>
+
+</body>
+</html>
