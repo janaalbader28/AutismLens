@@ -34,7 +34,7 @@ Users (collection)
 
 ## Website Pages
 
-| Task | Sub Tasks | Frontend | Backend | Notes |
+| Tasks | Sub Tasks | Frontend | Backend | Notes |
 | --- | --- | --- | --- | --- |
 | Log In | Doctor Login | ✅ | ✅ |  |
 | Log In | Admin login  | ✅ | ✅ |  |
