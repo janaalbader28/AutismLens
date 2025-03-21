@@ -34,22 +34,22 @@ Users (collection)
 
 ## Website Pages
 
-| Tasks | Sub Tasks | Frontend | Backend | Notes |
-| --- | --- | --- | --- | --- |
-| Log In | Doctor Login | ✅ | ✅ |  |
-| Log In | Admin login  | ✅ | ✅ |  |
-| Log In  | forget pass  | ✅ | ❌ | make it only for doctors  |
-| Home Page | Doctor Home Page | ✅ | ❌ |  |
-| Home Page | Admin Home Page | ✅ | ❌ |  |
-| Doctor | Add Patient | ✅ | ❌ |  |
-| Doctor | Show Patient | ✅ | ❌ |  |
-| Doctor | New Test | ❌ | ❌ |  |
-| Doctor | Results | ✅ | ❌ |  |
-| Doctor | Previous Results | ✅ | ❌ |  |
-| Doctor | Update Profile | ✅ | ❌ |  |
-| Admin | Add Doctor | ❌ | ❌ |  |
-| Admin | Show Doctor | ❌ | ❌ |  |
-| Admin | Update Doctor | ❌ | ❌ |  |
+| Task | Sub Tasks | Frontend | Backend | Notes | Completed By |
+| --- | --- | --- | --- | --- | --- |
+| Log In | Doctor Login | ✅ | ✅ |  | Rama, Jana |
+| Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
+| Log In  | forget pass  | ✅ | ❌ | make it only for doctors  | Rama, Jana |
+| Home Page | Doctor Home Page | ✅ | ❌ |  | Jumana |
+| Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
+| Doctor | Add Patient | ✅ | ❌ |  | Ruba |
+| Doctor | Show Patient | ✅ | ❌ |  | Ruba |
+| Doctor | New Test | ❌ | ❌ | upload the new version | Ruba |
+| Doctor | Results | ✅ | ❌ |  | Jumana |
+| Doctor | Previous Results | ✅ | ❌ |  | Jumana |
+| Doctor | Update Profile | ✅ | ❌ |  | Ruba |
+| Admin | Add Doctor | ❌ | ❌ |  |  |
+| Admin | Show Doctor | ❌ | ❌ |  |  |
+| Admin | Update Doctor | ❌ | ❌ |  |  |
 
 ---
 
