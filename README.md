@@ -62,4 +62,4 @@ Users (collection)
 | Doctor | log out | ✅ |
 | Admin | doctors | ❌ |
 | Admin | delete doctors | ❌ |
-| Admin | logout  | ❌ |
+| Admin | logout  | ✅  |
