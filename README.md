@@ -7,6 +7,7 @@
 Doctors (collection)
  ├── doctorID (document)
  │    ├── firstName: "John"
+ │    ├── MName: "le"
  │    ├── lastName: "Doe"
  │    ├── email: "john@example.com"
  │    ├── phone: "123456789"
