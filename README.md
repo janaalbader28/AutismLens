@@ -61,6 +61,6 @@ Users (collection)
 | --- | --- | --- |
 | Doctor | delete patients | ✅ |
 | Doctor | log out | ✅ |
-| Admin | doctors | ❌ |
+| Admin |  search for doctors | ❌ |
 | Admin | delete doctors | ❌ |
 | Admin | logout  | ✅  |
