@@ -20,6 +20,7 @@ Patients (collection)
  ├── patientID (document)
  │    ├── firstName: "Jane"
  │    ├── lastName: "Smith"
+ │    ├── gender: "female"
  │    ├── NID: "987654321"
  │    ├── birthday: "1995-06-10"
  │    ├── phone: "987654321"
