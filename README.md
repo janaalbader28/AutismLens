@@ -38,7 +38,7 @@ Users (collection)
 | --- | --- | --- | --- | --- | --- |
 | Log In | Doctor Login | ✅ | ✅ |  | Rama, Jana |
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
-| Log In  | forget pass  | ✅ | ❌ | make it only for doctors  | Rama, Jana |
+| Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ❌ |  | Jumana |
 | Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
 | Doctor | Add Patient | ✅ | ❌ |  | Ruba |
