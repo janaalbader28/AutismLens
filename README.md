@@ -40,9 +40,9 @@ Users (collection)
 | Log In | Doctor Login | ✅ | ✅ |  | Rama, Jana |
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
 | Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
-| Home Page | Doctor Home Page | ✅ | ❌ |  | Jumana |
+| Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
 | Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
-| Doctor | Add Patient | ✅ | ❌ |  | Ruba |
+| Doctor | Add Patient | ✅ | ✅ | store image | Ruba, Jana |
 | Doctor | Show Patient | ✅ | ❌ |  | Ruba |
 | Doctor | New Test | ❌ | ❌ | upload the new version | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
@@ -56,9 +56,9 @@ Users (collection)
 
 ## Functionality
 
-| Doctor | search for patients | ❌ |
+| Doctor | search for patients | ✅|
 | --- | --- | --- |
-| Doctor | delete patients | ❌ |
+| Doctor | delete patients | ✅ |
 | Doctor | log out | ✅ |
 | Admin | doctors | ❌ |
 | Admin | delete doctors | ❌ |
