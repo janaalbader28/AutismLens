@@ -44,7 +44,7 @@ Users (collection)
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
 | Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
 | Doctor | Add Patient | ✅ | ✅ | store image | Ruba, Jana |
-| Doctor | Show Patient | ✅ | ❌ |  | Ruba |
+| Doctor | Show Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | New Test | ❌ | ❌ | upload the new version | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
 | Doctor | Previous Results | ✅ | ❌ |  | Jumana |
