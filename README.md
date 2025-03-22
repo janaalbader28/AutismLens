@@ -59,7 +59,7 @@ Users (collection)
 | Doctor | search for patients | ❌ |
 | --- | --- | --- |
 | Doctor | delete patients | ❌ |
-| Doctor | log out | ❌ |
+| Doctor | log out | ✅ |
 | Admin | doctors | ❌ |
 | Admin | delete doctors | ❌ |
 | Admin | logout  | ❌ |
