@@ -43,7 +43,7 @@ Users (collection)
 | Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
 | Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
-| Doctor | Add Patient | ✅ | ☑ | store image | Ruba, Jana |
+| Doctor | Add Patient | ✅ | ☑ | store image/submit button | Ruba, Jana |
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | New Test | ❌ | ❌ | upload the new version | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
