@@ -26,12 +26,14 @@ Patients (collection)
  │    ├── phone: "987654321"
  │    ├── phone2: "123456789"
  │    ├── imageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
- └── TestResults (subcollection)
-         └── resultID (document)
-             ├── diagnosis: "Autism"
-             ├── xaiImageUrl: "https://.../gradcam.png"
-             ├── testDate: "2025-03-24"
-             ├── testAge: 8
+ 
+ TestResults (Collection)
+ ├── resultID (document)
+ │    ├── diagnosis: "Autism"
+ │    ├── xaiImageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
+ │    ├── testDate: "2025-03-24"
+ │    ├── testAge: "9"
+ │    ├── patientID: "uLm1L1YShRY6hqYNkcdW"
 
 Users (collection) 
  ├── userID (document)
@@ -64,7 +66,7 @@ Users (collection)
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | New Test | ❌ | ❌ |  | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
-| Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
+| Doctor | Previous Results | ✅ | ❌ |  | Jumana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
 | Admin | Add Doctor | ❌ | ❌ |  |  |
 | Admin | Show and Update Doctor | ❌ | ❌ |  |  |
