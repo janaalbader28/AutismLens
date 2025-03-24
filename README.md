@@ -25,9 +25,26 @@ Patients (collection)
  │    ├── birthday: "1995-06-10"
  │    ├── phone: "987654321"
  │    ├── phone2: "123456789"
+ │    ├── imageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
+ └── TestResults (subcollection)
+         └── resultID (document)
+             ├── diagnosis: "Autism"
+             ├── xaiImageUrl: "https://.../gradcam.png"
+             ├── testDate: "2025-03-24"
+             ├── testAge: 8
 
 Users (collection) 
  ├── userID (document)
+ │    ├── email: "admin@example.com"
+ │    ├── role: "admin"
+ │    ├── name: "admin"
+ ├── userID (document)
+ │    ├── email: "doctor@example.com"
+ │    ├── role: "doctor"
+ │    ├── name: "ahmad"
+ 
+ Admins (collection) 
+ ├── AdminID (document)
  │    ├── email: "admin@example.com"
  │    ├── role: "admin"
 ```
@@ -42,12 +59,12 @@ Users (collection)
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
 | Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
-| Home Page | Admin Home Page | ✅ | ❌ |  | Jumana |
-| Doctor | Add Patient | ✅ | ☑ | store image/submit button | Ruba, Jana |
+| Home Page | Admin Home Page | ✅ | ❌ |  | Jumana, |
+| Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
-| Doctor | New Test | ❌ | ❌ | upload the new version | Ruba |
+| Doctor | New Test | ❌ | ❌ |  | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
-| Doctor | Previous Results | ✅ | ❌ |  | Jumana |
+| Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
 | Admin | Add Doctor | ❌ | ❌ |  |  |
 | Admin | Show and Update Doctor | ❌ | ❌ |  |  |
@@ -56,10 +73,10 @@ Users (collection)
 
 ## Functionality
 
-| Doctor | search for patients | ✅|
+| Doctor | search for patients | ✅ |
 | --- | --- | --- |
 | Doctor | delete patients | ✅ |
 | Doctor | log out | ✅ |
-| Admin |  search for doctors | ❌ |
+| Admin | search for doctors | ❌ |
 | Admin | delete doctors | ❌ |
 | Admin | logout  | ✅  |
