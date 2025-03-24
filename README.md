@@ -27,7 +27,7 @@ Patients (collection)
  │    ├── phone2: "123456789"
  │    ├── imageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
  
- TestResults (Collection)
+ TestResults (collection)
  ├── resultID (document)
  │    ├── diagnosis: "Autism"
  │    ├── xaiImageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
