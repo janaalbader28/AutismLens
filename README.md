@@ -86,4 +86,4 @@ Users (collection)
 
 ## Image Storage
 
-**‼Note**: Image storage for patient images and XAI images is handled by **Cloudinary** instead of Firebase Storage. The image URLs stored in Firestore are hosted on **Cloudinary**, which provides a cloud-based image management solution.
+⚠️**Note**: Image storage for patient images and XAI images is handled by **Cloudinary** instead of Firebase Storage. The image URLs stored in Firestore are hosted on **Cloudinary**, which provides a cloud-based image management solution.
