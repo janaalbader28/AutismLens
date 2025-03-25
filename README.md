@@ -1,6 +1,5 @@
 # AutismLens
 ---
-
 ## Firestore Database
 
 ```jsx
@@ -27,7 +26,7 @@ Patients (collection)
  │    ├── phone2: "123456789"
  │    ├── imageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
  
- TestResults (collection)
+ TestResults (Collection)
  ├── resultID (document)
  │    ├── diagnosis: "Autism"
  │    ├── xaiImageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
@@ -61,7 +60,7 @@ Users (collection)
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
 | Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
-| Home Page | Admin Home Page | ✅ | ❌ |  | Jumana, |
+| Home Page | Admin Home Page | ✅ | ✅ |  | Jumana, Jana  |
 | Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | New Test | ❌ | ❌ |  | Ruba |
@@ -79,6 +78,12 @@ Users (collection)
 | --- | --- | --- |
 | Doctor | delete patients | ✅ |
 | Doctor | log out | ✅ |
-| Admin | search for doctors | ❌ |
-| Admin | delete doctors | ❌ |
+| Admin | search for doctors | ✅ |
+| Admin | delete doctors | ✅ |
 | Admin | logout  | ✅  |
+
+---
+
+## Image Storage
+
+**‼Note**: Image storage for patient images and XAI images is handled by **Cloudinary** instead of Firebase Storage. The image URLs stored in Firestore are hosted on **Cloudinary**, which provides a cloud-based image management solution.
