@@ -65,7 +65,7 @@ Users (collection)
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | New Test | ❌ | ❌ |  | Ruba |
 | Doctor | Results | ✅ | ❌ |  | Jumana |
-| Doctor | Previous Results | ✅ | ❌ |  | Jumana |
+| Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
 | Admin | Add Doctor | ❌ | ❌ |  |  |
 | Admin | Show and Update Doctor | ❌ | ❌ |  |  |
