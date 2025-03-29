@@ -68,7 +68,7 @@ Users (collection)
 | Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
 | Admin | Add Doctor | ❌ | ❌ |  |  |
-| Admin | Show and Update Doctor | ❌ | ❌ |  |  |
+| Admin | Show and Update Doctor | ✅  | ❌ |  | Jana |
 
 ---
 
