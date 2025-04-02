@@ -48,6 +48,7 @@ Users (collection)
  ├── AdminID (document)
  │    ├── email: "admin@example.com"
  │    ├── role: "admin"
+ │    ├── name: "admin"
 ```
 
 ---
