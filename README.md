@@ -58,7 +58,7 @@ Users (collection)
 | --- | --- | --- | --- | --- | --- |
 | Log In | Doctor Login | ✅ | ✅ |  | Rama, Jana |
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
-| Log In  | forget pass  | ✅ | ☑ | make it only for doctors  | Rama, Jana |
+| Log In  | forget pass  | ✅ | ✅ |  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
 | Home Page | Admin Home Page | ✅ | ✅ |  | Jumana, Jana  |
 | Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
