@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #1E57AE, #89B1EC);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 950px;
+}
+
+.form-card {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 120px;
+}
+
+.form-title {
+    font-family: 'Abhaya Libre', sans-serif;
+    font-weight: 800;
+    flex: 1;
+    text-align: center;
+    color: #1e3a8a;
+    font-size: 32px;
+    margin: 0;
+    padding-right: 90px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.cancel {
+    background-color: #ccc;
+    color: black;
+}
+
+.create {
+    background-color: #8AB2ED;
+    color: white;
+}
+
+.create:hover {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+.cancel:hover {
+    background-color: #999;
+    color: white;
+}
