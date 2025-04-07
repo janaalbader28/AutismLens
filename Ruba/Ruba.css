@@ -158,6 +158,47 @@ button {
     color: black;
 }
 
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.upload-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.upload-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+    cursor: pointer;
+    position: relative;
+}
+.upload-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+}
+.upload-box input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.form-section {
+    flex: 2;
+}
 .special-logout-btn {
     background-color: #F2C3C4;
     color: black;
