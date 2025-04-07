@@ -64,7 +64,7 @@ Users (collection)
 | Home Page | Admin Home Page | ✅ | ✅ |  | Jumana, Jana  |
 | Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
-| Doctor | Generate New Test | ✅ | ❌ |  | Ruba, Jana |
+| Doctor | Generate New Test | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | Test Results | ✅ | ❌ |  | Jumana |
 | Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
