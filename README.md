@@ -61,14 +61,14 @@ Users (collection)
 | Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
 | Log In  | forget pass  | ✅ | ✅ |  | Rama, Jana |
 | Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
-| Home Page | Admin Home Page | ✅ | ✅ |  | Jumana, Jana  |
+| Home Page | Admin Home Page | ✅ | ✅ | the doctor should also be deleted from Authentication | Jumana, Jana  |
 | Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
 | Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
 | Doctor | Generate New Test | ✅ | ✅ | submit button> to the model | Ruba, Jana |
 | Doctor | Test Results | ✅ | ❌ | display model results and save it to TestResults | Jumana |
 | Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
 | Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
-| Admin | Add Doctor | ✅ | ❌ |  | Atheer, Jana |
+| Admin | Add Doctor | ✅ | ✅ |  | Atheer, Jana |
 | Admin | Show and Update Doctor | ✅  | ✅ |  | Jana |
 
 ---
