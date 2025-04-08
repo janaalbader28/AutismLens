@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Patient</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png">
+  <link rel="stylesheet" href="style2.css">
+  <style>
+    .content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .upload-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .upload-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #ccc;
+      cursor: pointer;
+      position: relative;
+    }
+    .upload-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .upload-box input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .divider {
+      width: 2px;
+      background-color: #ccc;
+      height: 100%;
+      margin: 0 20px;
+    }
+    .form-section {
+      flex: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="special-outer-container">
+    <div class="special-header">
+      <img src="images/logo.png" alt="AutismLens Logo" class="special-logo">
+      <h2>Add New Patient</h2>
+    </div>
+    <div class="special-container">
+      <div class="content-wrapper">
+        <div class="upload-section">
+          <div class="upload-box" onclick="document.getElementById('fileInput').click();">
+            <img id="uploadedImage" src="images/profile.png" alt="Image Preview"  />
+            <input type="file" id="fileInput" accept="image/*" required>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="form-section">
+          <form id="patientForm">
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>First Name:<span style="color: red;"> *</span></label>
+                <input type="text" id="firstName" placeholder="Enter the first name" required>
+              </div>
+              <div class="special-form-group">
+                <label>Last Name:<span style="color: red;"> *</span></label>
+                <input type="text" id="lastName" placeholder="Enter the last name" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Gender:<span style="color: red;"> *</span></label>
+                <select id="gender" required>
+                  <option value="">Select the gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="special-form-group">
+                <label>National ID (NID):<span style="color: red;"> *</span></label>
+                <input type="text" id="nid"placeholder="1009875679" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Age:<span style="color: red;"> *</span></label>
+                <input type="text" id="age" class="special-readonly" disabled>
+              </div>
+              <div class="special-form-group">
+                <label>Birth Date:<span style="color: red;"> *</span></label>
+                <input type="date" id="birthDate" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Phone No.:<span style="color: red;"> *</span></label>
+                <input type="text" id="phone"placeholder="05xxxxxxxx" required>
+              </div>
+              <div class="special-form-group">
+                <label>Additional Phone No.:</label>
+                <input type="text" id="phone2">
+              </div>
+            </div>
+            <div class="special-button-group">
+              <button class="special-cancel-btn" type="button" onclick="window.history.back()">Cancel</button>
+              <button class="special-save-btn" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, db } from "./firebase-config.js";
+    import { doc, setDoc, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+    let doctorID = null;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        doctorID = user.uid;
+      } else {
+        window.location.href = "doctor_login.html";
+      }
+    });
+
+    async function uploadImageToCloudinary(file) {
+      const url = `https://api.cloudinary.com/v1_1/dkv2xo8yn/image/upload`;
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "unsigned_preset");
+
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error("Image upload failed");
+
+      const data = await response.json();
+      return data.secure_url;
+    }
+
+    document.getElementById("patientForm").addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent automatic submission
+
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName = document.getElementById("lastName").value.trim();
+      const gender = document.getElementById("gender").value;
+      const nid = document.getElementById("nid").value.trim();
+      const birthDate = document.getElementById("birthDate").value;
+      const phone = document.getElementById("phone").value.trim();
+      const phone2 = document.getElementById("phone2").value.trim();
+      const file = document.getElementById("fileInput").files[0];
+
+      // Validate form fields
+      if (nid.length !== 10) {
+        alert("National ID (NID) should be 10 digits.");
+        return;
+      }
+
+      if (phone.length !== 10) {
+        alert("Phone number should be 10 digits.");
+        return;
+      }
+
+      if (phone2 && phone2.length !== 10) {
+        alert("Additional phone number should be 10 digits.");
+        return;
+      }
+
+      const patientsRef = collection(db, "Patients");
+      const querySnapshot = await getDocs(query(patientsRef, where("NID", "==", nid)));
+
+      if (!querySnapshot.empty) {
+        alert("A patient with this National ID already exists.");
+        return;
+      }
+
+      if (!file) {
+        alert("Please upload an image.");
+        return;
+      }
+
+      let imageUrl = "";
+      try {
+        if (file) {
+          imageUrl = await uploadImageToCloudinary(file);
+        }
+
+        await addDoc(collection(db, "Patients"), {
+          firstName,
+          lastName,
+          gender,
+          NID: nid,
+          birthday: birthDate,
+          phone,
+          phone2,
+          imageUrl,
+          addedBy: doctorID,
+        });
+        
+
+        alert("Patient added successfully!");
+        window.location.href = "Test_Result.html";
+      } catch (error) {
+        console.error("Error adding patient:", error);
+        alert("Error: " + error.message);
+      }
+    });
+  </script>
+
+  <script>
+    window.calculateAge = function () {
+      const birthDate = new Date(document.getElementById("birthDate").value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      document.getElementById("age").value = age;
+    };
+
+    window.previewImage = function (event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const image = document.getElementById("uploadedImage");
+        image.src = reader.result;
+        image.style.display = "block"; 
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    };
+
+    document.getElementById("birthDate").addEventListener("change", window.calculateAge);
+    document.getElementById("fileInput").addEventListener("change", window.previewImage);
+  </script>
+</body>
+</html>
