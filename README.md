@@ -16,7 +16,7 @@
 1. Upload a facial image of a child.
 2. The model analyzes the image and detects whether the child has autism.
 3. Grad-CAM highlights key facial features used in the prediction for better interpretability.
-4. Results are displayed on the web interface.
+4. Results are displayed on the web  interface.
 
 ---
 
