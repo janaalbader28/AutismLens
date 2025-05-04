@@ -1,103 +1,77 @@
-# AutismLens
----
-## Firestore Database
+# 🧠 AutismLens
 
-https://autismlens.netlify.app/
-
-```jsx
-Doctors (collection)
- ├── doctorID (document)
- │    ├── firstName: "John"
- │    ├── MName: "le"
- │    ├── lastName: "Doe"
- │    ├── email: "john@example.com"
- │    ├── phone: "123456789"
- │    ├── specialization: "Cardiology"
- │    ├── gender: "Male"
- │    ├── NID: "123456789"
- │    ├── role: "doctor"   ← 🔹 Used for authorization
-
-Patients (collection)
- ├── patientID (document)
- │    ├── firstName: "Jane"
- │    ├── lastName: "Smith"
- │    ├── gender: "female"
- │    ├── NID: "987654321"
- │    ├── birthday: "1995-06-10"
- │    ├── phone: "987654321"
- │    ├── phone2: "123456789"
- 
- TestResults (Collection)
- ├── resultID (document)
- │    ├── diagnosis: "Autism"
- │    ├── xaiImageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
- │    ├── testDate: "2025-03-24"
- │    ├── testAge: "9"
- │    ├── explanation: ""
- │    ├── justification: ""
- │    ├── top3Classes: ""
- │    ├── patientID: "uLm1L1YShRY6hqYNkcdW"
-
-
-Users (collection) 
- ├── userID (document)
- │    ├── email: "admin@example.com"
- │    ├── role: "admin"
- │    ├── name: "admin"
- ├── userID (document)
- │    ├── email: "doctor@example.com"
- │    ├── role: "doctor"
- │    ├── name: "ahmad"
- 
- Admins (collection) 
- ├── AdminID (document)
- │    ├── email: "admin@example.com"
- │    ├── role: "admin"
- │    ├── name: "admin"
-```
+**AutismLens** is a deep learning-based project focused on improving the early diagnosis of Autism Spectrum Disorder (ASD) using facial image analysis. This project integrates advanced CNN architectures, particularly **ConvNeXt**, with interpretability tools like **Grad-CAM** to provide accurate and explainable predictions. The system is designed to assist clinicians and researchers in identifying ASD-related patterns through facial features.
 
 ---
 
-## Website Pages
+## 🎯 Goals
 
-| Task | Sub Tasks | Frontend | Backend | Notes | Completed By |
-| --- | --- | --- | --- | --- | --- |
-| Log In | Doctor Login | ✅ | ✅ |  | Rama, Jana |
-| Log In | Admin login  | ✅ | ✅ |  | Rama, Jana |
-| Log In  | forget pass  | ✅ | ✅ |  | Rama, Jana |
-| Home Page | Doctor Home Page | ✅ | ✅ |  | Jumana, Jana |
-| Home Page | Admin Home Page | ✅ | ✅ | the doctor should also be deleted from Authentication | Jumana, Jana  |
-| Doctor | Add Patient | ✅ | ☑ | submit button> to the model | Ruba, Jana |
-| Doctor | Show and Update Patient | ✅ | ✅ |  | Ruba, Jana |
-| Doctor | Generate New Test | ✅ | ✅ | submit button> to the model | Ruba, Jana |
-| Doctor | Test Results | ✅ | ❌ | display model results and save it to TestResults | Jumana |
-| Doctor | Previous Results | ✅ | ✅ |  | Jumana, Jana |
-| Doctor | Update Profile | ✅ | ✅ |  | Ruba, Jana |
-| Admin | Add Doctor | ✅ | ✅ |  | Atheer, Jana |
-| Admin | Show and Update Doctor | ✅  | ✅ |  | Jana |
+- Early, explainable detection of ASD through facial image recognition.
+- Improve diagnostic accuracy and speed using advanced AI.
+- Provide a simple and interpretable tool for researchers and clinicians.
+
+---
+## 🧩 How It Works
+
+1. Upload a facial image of a child.
+2. The model analyzes the image and detects whether the child has autism.
+3. Grad-CAM highlights key facial features used in the prediction for better interpretability.
+4. Results are displayed on the web interface.
 
 ---
 
-## Functionality
 
-| Doctor | search for patients | ✅ |
-| --- | --- | --- |
-| Doctor | delete patients | ✅ |
-| Doctor | log out | ✅ |
-| Admin | search for doctors | ✅ |
-| Admin | delete doctors | ✅ |
-| Admin | logout  | ✅  |
+## 📂 Datasets Used
+
+1. **Autism vs. Healthy Children**  
+   📥 [Kaggle Dataset – Autism Image Data](https://www.kaggle.com/datasets/cihan063/autism-image-data)
+
+2. **Neurodevelopmental Disorders (NDD)**  
+   📥 [Roboflow Dataset – Down Syndrome Facial Images](https://universe.roboflow.com/shreeya-ywxmu/ds-pranf/dataset/1)
+
+3. **Other Sources (NDD Syndromes)**  
+   Additional facial images for the following syndromes were obtained from various open-access sources:
+   - 22q11.2 Deletion Syndrome  
+   - 22q11.2 Duplication Syndrome  
+   - Fragile X Syndrome  
+   - Williams-Beuren Syndrome  
+   - Cerebral Palsy Disorder
+---
+
+## 📂 Model Weights
+
+The pre-trained model weights for **AutismLens** can be accessed and downloaded from the following link:
+
+📥 [Download Model Weights](https://drive.google.com/drive/folders/1xmJkqmGAzoQ5ht7p5mWyXEBKwUGTYfjW?usp=drive_link)
+
+---
+## 📊 Model Performance
+
+| Model                 | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) |
+|----------------------|--------------|----------------|-------------|----------------|
+| **ConvNeXt**              | 92%          | 92%            | 92%         | 92%            |
+| Vision Transformer (ViT) | 88%          | 88%            | 88%         | 88%            |
+| DenseNet121              | 87%          | 87%            | 87%         | 87%            |
+| EfficientNet_b0          | 87%          | 87%            | 87%         | 87%            |
+| ResNet50                 | 89%          | 89%            | 89%         | 89%            |
 
 ---
 
-## Image Storage
+## 💡 Key Technologies (Tools)
 
-⚠️**Note**: Image storage for patient images and XAI images is handled by **Cloudinary** instead of Firebase Storage. The image URLs stored in Firestore are hosted on **Cloudinary**, which provides a cloud-based image management solution.
+- **Google Colab** – for training and experimenting with the model in a cloud-based environment  
+- **PyTorch** – the deep learning framework used to build and train the models  
+- **Grad-CAM** – for visual explanations to enhance model interpretability (XAI)  
+- **FastAPI** – to serve the model through a lightweight and efficient web API  
+- **GitHub** – for version control, collaboration, and sharing the project source code  
+- **Firebase** – used for managing the database and user authentication
+- **Cloudinary** – used to store images, with URLs saved in Firebase   
+- **Visual Studio Code** – used for website development  
 
 
 ---
 
-## FastAPI Integration Steps
+## ⚙️ FastAPI Integration Steps
 
 1. upload the [code] project folder into --> C:\Users\*your account name*
 2. open vs code and then from file open [autismlens-project] folder that is inside [code] folder
@@ -111,3 +85,37 @@ Then try activating again:
 
 4. pip install fastapi uvicorn torch torchvision pydantic requests
 5. uvicorn main:main --reload
+---
+## 👩‍💻 Developers
+
+- **Jumana Khawaji**  
+  <p align="left">
+    <a href="https://github.com/iijumanaAhmed" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Jumana Khawaji" height="30" width="40" /></a>
+    <a href="https://www.linkedin.com/in/jumana-khawaji-0488382b8" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Jumana Khawaji" height="30" width="40" /></a>
+  </p>
+
+- **Atheer Al Otaibi**  
+  <p align="left">
+    <a href="https://github.com/AtheerMishal" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Atheer Al Otaibi" height="30" width="40" /></a>
+    <a href="https://www.linkedin.com/in/atheer-mishal-al-otaibi/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Atheer Al Otaibi" height="30" width="40" /></a>
+  </p>
+
+- **Jana Albader**  
+  <p align="left">
+    <a href="https://github.com/janaalbader28" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Jana Albader" height="30" width="40" /></a>
+    <a href="https://www.linkedin.com/in/jana-albader/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Jana Albader" height="30" width="40" /></a>
+  </p>
+
+- **Rama Alzahrani**  
+  <p align="left">
+    <a href="https://github.com/RamaKhalid" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Rama Alzahrani" height="30" width="40" /></a>
+    <a href="https://www.linkedin.com/in/rama-alzahrani-6ba7362b6/" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Rama Alzahrani" height="30" width="40" /></a>
+  </p>
+
+- **Ruba Alshehri**  
+  <p align="left">
+    <a href="https://github.com/ruba-21" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="Ruba Alshehri" height="30" width="40" /></a>
+    <a href="https://www.linkedin.com/in/ruba-alshehri-069a32281/?locale=en_US" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="Ruba Alshehri" height="30" width="40" /></a>
+  </p>
+
+
