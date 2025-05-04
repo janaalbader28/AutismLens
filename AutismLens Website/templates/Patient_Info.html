@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Info</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="static/style2.css">
+</head>
+<body>
+
+<div class="special-outer-container">
+    <div class="special-header">
+        <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo"> 
+        <h2>Patient Info</h2>
+    </div>
+    
+    <div class="special-container">
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="national-id">National ID (NID):</label>
+                <input type="text" id="national-id" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="age">Age:</label>
+                <input type="text" id="age" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="birth-date">Birth Date:</label>
+                <input type="date" id="birth-date" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="phone">Phone No:<span style="color: red;"> *</span></label>
+                <input type="text" id="phone">
+            </div>
+            <div class="special-form-group">
+                <label for="additional-phone">Additional Phone No:</label>
+                <input type="text" id="additional-phone">
+            </div>
+        </div>
+        
+        <div class="special-button-group" style="display: flex; justify-content: space-between;">
+            <div>
+                <!-- UPDATED BUTTON HERE -->
+                <button class="special-generate-btn" onclick="generateNewTest()">Generate New Test</button>
+            </div>
+            <div>
+                <button class="special-save-btn" onclick="savePatientInfo()">Save</button>
+                <a class="special-cancel-btn" href="/Doctor_Homepage">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { db } from '/static/firebase-config.js';
+    import { doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+
+    // Extract the patientId from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const patientId = urlParams.get('patientId'); 
+
+    // Fetch patient data 
+    async function loadPatientInfo() {
+        if (!patientId) {
+            alert('Patient ID is missing!');
+            return;
+        }
+
+        const docRef = doc(db, 'Patients', patientId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const patientData = docSnap.data();
+
+            console.log('Fetched Patient Data:', patientData);
+
+            if (patientData.firstName) {
+                document.getElementById('first-name').value = patientData.firstName;
+            }
+
+            if (patientData.lastName) {
+                document.getElementById('last-name').value = patientData.lastName;
+            }
+
+            if (patientData.NID) {
+                document.getElementById('national-id').value = patientData.NID;
+            }
+            if (patientData.gender) {
+                document.getElementById('gender').value = patientData.gender;
+            }
+
+            if (patientData.birthday) {
+                document.getElementById('birth-date').value = patientData.birthday;
+            }
+
+            if (patientData.birthday) {
+                const birthDate = new Date(patientData.birthday);
+                const age = new Date().getFullYear() - birthDate.getFullYear();
+                document.getElementById('age').value = age;
+            }
+
+            if (patientData.phone) {
+                document.getElementById('phone').value = patientData.phone;
+            }
+
+            if (patientData.phone2) {
+                document.getElementById('additional-phone').value = patientData.phone2;
+            }
+
+        } else {
+            alert('No patient data found!');
+        }
+    }
+
+    // Load patient info
+    loadPatientInfo();
+
+    window.savePatientInfo = async function() {
+        console.log('savePatientInfo function is loaded and called!');
+
+        const phone = document.getElementById('phone').value;
+        const additionalPhone = document.getElementById('additional-phone').value;
+
+        const phoneRegex = /^[0-9]{10}$/; 
+
+        if (!phoneRegex.test(phone)) {
+            alert('Phone number must be exactly 10 digits.');
+            return;
+        }
+
+        if (additionalPhone && !phoneRegex.test(additionalPhone)) {
+            alert('Additional phone number must be exactly 10 digits or empty.');
+            return;
+        }
+
+        const docRef = doc(db, 'Patients', patientId);
+
+        try {
+            await updateDoc(docRef, {
+                phone: phone,
+                phone2: additionalPhone
+            });
+
+            alert('Patient info saved successfully!\nPhone: ' + phone + '\nAdditional Phone: ' + additionalPhone);
+        } catch (error) {
+            console.error('Error updating document:', error);
+            alert('Failed to save patient info.');
+        }
+    }
+
+    window.generateNewTest = function () {
+        if (!patientId) {
+            alert('Patient ID is missing!');
+            return;
+        }
+        window.location.href = `/Generate_New_Test?patientId=${patientId}`;
+    };
+</script>
+
+<script type="module" src="/static/firebase-config.js"></script>
+
+</body>
+</html>

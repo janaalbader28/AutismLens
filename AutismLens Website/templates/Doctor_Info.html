@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Doctor Info</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" href="static/style2.css">
+</head>
+<body>
+
+<div class="special-outer-container">
+    <div class="special-header">
+        <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo"> 
+        <h2>Update Doctor Info</h2>
+    </div>
+    
+    <div class="special-container">
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="doctor-name">Doctor Name:</label>
+                <input type="text" id="doctor-name" >
+            </div>
+            <div class="special-form-group">
+                <label for="specialization">Specialization:</label>
+                <input type="text" id="specialization">
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email">
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="national-id">National ID:</label>
+                <input type="text" id="national-id" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="doctor-id">Doctor ID:</label>
+                <input type="text" id="doctor-id" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="phone">Phone No:</label>
+                <input type="text" id="phone" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="password">Password:</label>
+                <input type="text" id="password" class="special-readonly" readonly placeholder="********">
+            </div>
+        </div>
+        
+        <div class="special-button-group2">
+            <div>
+                <a class="special-save-btn" href="/Admin_Homepage">Save</a>
+                <a class="special-cancel-btn" href="/Admin_Homepage">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { db } from '/static/firebase-config.js';
+    import { doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const doctorId = urlParams.get('doctorId');
+
+        // Fetch doctor data from Firestore
+        async function loadDoctorInfo() {
+            if (!doctorId) {
+                alert('Doctor ID is missing!');
+                return;
+            }
+
+            const docRef = doc(db, 'Doctors', doctorId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const doctorData = docSnap.data();
+
+                console.log('Fetched Doctor Data:', doctorData);
+
+                document.getElementById('doctor-name').value = 
+                    `${doctorData.firstName || ''} ${doctorData.MName || ''} ${doctorData.lastName || ''}`.trim();
+
+                document.getElementById('specialization').value = doctorData.specialization || '';
+                document.getElementById('gender').value = doctorData.gender || '';
+                document.getElementById('email').value = doctorData.email || '';
+                document.getElementById('national-id').value = doctorData.NID || '';
+                document.getElementById('doctor-id').value = doctorId; 
+                document.getElementById('phone').value = doctorData.phone || '';
+                // Password field is set with placeholder '********'
+            } else {
+                alert('No doctor data found!');
+            }
+        }
+
+        // Load doctor info
+        loadDoctorInfo();
+
+        // Save the doctor info 
+        async function saveDoctorInfo() {
+            console.log('saveDoctorInfo function is loaded and called!');
+
+            const phone = document.getElementById('phone').value;
+            const specialization = document.getElementById('specialization').value;
+            const email = document.getElementById('email').value;
+            const doctorName = document.getElementById('doctor-name').value.trim();
+
+            // Split the doctor name into first, middle, and last names
+            const nameParts = doctorName.split(' ');
+
+            if (nameParts.length < 2) {
+                alert('Please enter the full name');
+                return;
+            }
+
+            const firstName = nameParts[0];
+            const lastName = nameParts[nameParts.length - 1];
+            const middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
+
+            // Validation for specialization
+            if (!specialization) {
+                alert('Please enter the specialization field');
+                return;
+            }
+
+            // Validation for email format
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email || !emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+
+            // Save the updated doctor information 
+            const docRef = doc(db, 'Doctors', doctorId);
+
+            try {
+                await updateDoc(docRef, {
+                    firstName: firstName,
+                    MName: middleName,
+                    lastName: lastName,
+                    phone: phone,
+                    specialization: specialization,
+                    email: email
+                });
+
+                alert('Doctor info saved successfully!');
+                window.location.href = "/Admin_Homepage";
+
+            } catch (error) {
+                console.error('Error updating document:', error);
+                alert('Failed to save doctor info.');
+            }
+        }
+
+        // Fix: Attach saveDoctorInfo and prevent default navigation
+        document.querySelector('.special-save-btn').addEventListener('click', (e) => {
+            e.preventDefault(); // ✨ This line stops the <a> tag default action
+            saveDoctorInfo();
+        });
+    });
+</script>
+
+<script type="module" src="/static/firebase-config.js"></script>
+
+</body>
+</html>

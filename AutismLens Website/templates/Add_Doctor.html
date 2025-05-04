@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Doctor</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+  <link rel="stylesheet" href="static/style2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    .content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .form-section {
+      flex: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="special-outer-container">
+    <div class="special-header">
+      <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo">
+      <h2>Add New Doctor</h2>
+    </div>
+    <div class="special-container">
+      <div class="content-wrapper">
+        <div class="divider"></div>
+        <div class="form-section">
+          <form id="doctorForm">
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Doctor Name:<span style="color: red;"> *</span></label>
+                <input type="text" id="DoctorName" required placeholder="Enter doctor's name">
+              </div>
+              <div class="special-form-group">
+                <label>Specialization:<span style="color: red;"> *</span></label>
+                <input type="text" id="specialization" required placeholder="Enter doctor's specialization">
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Gender:<span style="color: red;"> *</span></label>
+                <select id="gender" required>
+                  <option value="">Select gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="special-form-group">
+                <label>Email:<span style="color: red;"> *</span></label>
+                <input type="email" id="email" required placeholder="xxxx@xxxx.xx">
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>National ID:<span style="color: red;"> *</span></label>
+                <input type="text" id="nid" required placeholder="1009875679">
+              </div>
+              <div class="special-form-group">
+                <label>Doctor ID:<span style="color: red;"> *</span></label>
+                <input type="text" id="doctorid" class="special-readonly" readonly placeholder="Doctor ID will be auto-generated">
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Phone No.:<span style="color: red;"> *</span></label>
+                <input type="text" id="phone" required placeholder="05xxxxxxxx">
+              </div>
+              <div class="special-form-group" style="position: relative;">
+                <label>Password:</label>
+                <input type="password" id="password" class="special-readonly" readonly>
+                <i id="toggleIcon" class="fa-solid fa-eye" style="position: absolute; right: 10px; top: 35px; cursor: pointer;"></i>
+              </div>
+            </div>
+            <div class="button-group">
+              <button class="special-save-btn" type="submit">Add</button>
+              <a class="special-cancel-btn" type="button" href="/Admin_Homepage">Cancel</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/static/firebase-config.js"></script>
+
+  <script type="module">
+    import { auth, db } from '/static/firebase-config.js';
+    import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+    import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+    // Password generator
+    function generatePassword(length = 8) {
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()";
+      let password = "";
+      for (let i = 0; i < length; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+      return password;
+    }
+
+    // Doctor ID generator
+    function generateDoctorId() {
+      return 'DOC-' + Math.floor(1000 + Math.random() * 9000); // example: DOC-4583
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("password").value = generatePassword();
+      document.getElementById("doctorid").value = generateDoctorId();
+    });
+
+    // Eye toggle
+    const toggleIcon = document.getElementById("toggleIcon");
+    const passwordInput = document.getElementById("password");
+
+    toggleIcon.addEventListener("click", () => {
+      const isPasswordVisible = passwordInput.type === "text";
+      passwordInput.type = isPasswordVisible ? "password" : "text";
+      toggleIcon.classList.toggle("fa-eye");
+      toggleIcon.classList.toggle("fa-eye-slash");
+    });
+
+    document.getElementById("doctorForm").addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const doctorName = document.getElementById("DoctorName").value.trim();
+      const specialization = document.getElementById("specialization").value.trim();
+      const gender = document.getElementById("gender").value;
+      const email = document.getElementById("email").value.trim();
+      const nid = document.getElementById("nid").value.trim();
+      const doctorId = document.getElementById("doctorid").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!doctorName.includes(" ")) {
+        alert("Please enter full name (first and last).");
+        return;
+      }
+
+      if (nid.length !== 10 || !/^\d+$/.test(nid)) {
+        alert("NID must be 10 digits.");
+        return;
+      }
+
+      if (phone.length !== 10 || !/^\d+$/.test(phone)) {
+        alert("Phone number must be 10 digits.");
+        return;
+      }
+
+      try {
+        // Check if a doctor with this NID already exists
+        const existingDoc = await getDoc(doc(db, "Doctors", nid));
+        if (existingDoc.exists()) {
+          alert("A doctor with this NID already exists.");
+          return;
+        }
+
+        // Create user in Firebase Authentication
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+
+        // Add doctor info to "Doctors" collection
+        await setDoc(doc(db, "Doctors", user.uid), {
+          firstName: doctorName.split(" ")[0],
+          lastName: doctorName.split(" ")[1] || "",
+          email,
+          phone,
+          specialization,
+          gender,
+          NID: nid,
+          doctorID: doctorId,
+          role: "doctor",
+          password 
+        });
+
+        // Add minimal info to "Users" collection
+        await setDoc(doc(db, "Users", user.uid), {
+          email,
+          role: "doctor",
+          name: doctorName
+        });
+
+        alert("Doctor added successfully!");
+        window.location.href = "/Admin_Homepage"; 
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to add doctor: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>

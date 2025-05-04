@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Add Patient</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+  <link rel="stylesheet" href="/static/style2.css">
+  <style>
+    .content-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .upload-section {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .upload-box {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 2px dashed #ccc;
+      cursor: pointer;
+      position: relative;
+    }
+    .upload-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .upload-box input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .divider {
+      width: 2px;
+      background-color: #ccc;
+      height: 100%;
+      margin: 0 20px;
+    }
+    .form-section {
+      flex: 2;
+    }
+
+    a {
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 5px;
+      font-weight: bold;
+      text-decoration: none;
+  }
+    /* ruba.css - Updated Styles for Upload Form */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Outer Container */
+.special-outer-container {
+    width: 100%;
+    max-width: 950px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.special-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.special-logo {
+  width: 8vw;
+
+    margin-right: 30%; /* Space between logo and title */
+}
+
+h2 {
+    font-family: "Abhaya Libre ExtraBold", sans-serif;
+    text-align: center;
+    color: #333;
+    margin: 0;
+}
+
+/* Container */
+.special-container {
+    width: 100%;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Upload Section */
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.upload-box {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.upload-box img {
+    width: 50px;
+    height: 50px;
+}
+
+/* Form Layout */
+.special-form-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.special-form-group {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.special-form-group:last-child {
+    margin-right: 0;
+}
+
+.special-form-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover,
+input[type="date"]:hover,
+select:hover {
+    border-color: #4A90E2;
+}
+
+/* Readonly Input */
+.special-readonly {
+    background-color: #f0f0f0;
+    border: none;
+}
+
+/* Button Group */
+.special-button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    width: 100%;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+/* Button Styles */
+.special-save-btn {
+    background-color: #8AB2ED;
+    color: black;
+}
+
+.special-cancel-btn {
+    background-color: #F8F8F8;
+    color: black;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-section {
+    flex: 2;
+}
+.special-logout-btn {
+    background-color: #F2C3C4;
+    color: black;
+}
+
+.special-generate-btn {
+    background-color: #008CBA;
+    color: white;
+}
+
+.special-generate-btn:hover {
+    background-color: #005f73;
+}
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;}
+
+  </style>
+</head>
+<body>
+  <div class="special-outer-container">
+    <div class="special-header">
+      <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo">
+      <h2>Add New Patient</h2>
+    </div>
+    <div class="special-container">
+      <div class="content-wrapper">
+        <div class="divider"></div>
+        <div class="form-section">
+
+            <form id="patientForm" >
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>First Name:<span style="color: red;"> *</span></label>
+                <input type="text" id="firstName" name="firstName" placeholder="Enter the first name" required>
+              </div>
+              <div class="special-form-group">
+                <label>Last Name:<span style="color: red;"> *</span></label>
+                <input type="text" id="lastName" name="lastName" placeholder="Enter the last name" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Gender:<span style="color: red;"> *</span></label>
+                <select id="gender" name="gender" required>
+                  <option value="">Select the gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="special-form-group">
+                <label>National ID (NID):<span style="color: red;"> *</span></label>
+                <input type="text" name="nid" id="nid"placeholder="1009875679" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Age:<span style="color: red;"> *</span></label>
+                <input type="text" id="age" name="age" class="special-readonly" disabled>
+              </div>
+              <div class="special-form-group">
+                <label>Birth Date:<span style="color: red;"> *</span></label>
+                <input type="date" id="birthDate" name="birthDate" required>
+              </div>
+            </div>
+            <div class="special-form-row">
+              <div class="special-form-group">
+                <label>Phone No.:<span style="color: red;"> *</span></label>
+                <input type="text" id="phone" name="phone" placeholder="05xxxxxxxx" required>
+              </div>
+              <div class="special-form-group">
+                <label>Additional Phone No.:</label>
+                <input type="text" id="phone2" name="phone2" >
+              </div>
+            </div>
+            <div class="special-button-group">
+              <a class="special-cancel-btn" type="button" href = "/Doctor_Homepage">Cancel</a>
+              <button class="special-save-btn" type="submit">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth, db } from "/static/firebase-config.js";
+    import { doc, setDoc, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+  
+    let doctorID = null;
+  
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        doctorID = user.uid;
+      } else {
+        window.location.href = "/doctor_login";
+      }
+    });
+  
+    document.getElementById("patientForm").addEventListener("submit", async (event) => {
+  event.preventDefault(); // prevent form's default submission
+
+  const form = event.target;
+  const formData = new FormData(form); // includes the file
+  const file = formData.get("file");
+
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const gender = document.getElementById("gender").value;
+  const nid = document.getElementById("nid").value.trim();
+  const birthDate = document.getElementById("birthDate").value;
+  const phone = document.getElementById("phone").value.trim();
+  const phone2 = document.getElementById("phone2").value.trim();
+
+  if (nid.length !== 10) {
+    alert("National ID (NID) should be 10 digits.");
+    return;
+  }
+
+  if (phone.length !== 10) {
+    alert("Phone number should be 10 digits.");
+    return;
+  }
+
+  if (phone2 && phone2.length !== 10) {
+    alert("Additional phone number should be 10 digits.");
+    return;
+  }
+
+  try {
+    // Check if a patient with the same NID already exists
+    const patientsRef = collection(db, "Patients");
+    const querySnapshot = await getDocs(query(patientsRef, where("NID", "==", nid)));
+
+    if (!querySnapshot.empty) {
+      alert("A patient with this National ID already exists.");
+      return; // Exit early if patient already exists
+    }
+
+    // If NID is unique, add the new patient
+    const docRef = await addDoc(collection(db, "Patients"), {
+      firstName,
+      lastName,
+      gender,
+      NID: nid,
+      birthday: birthDate,
+      phone,
+      phone2,
+    });
+
+    alert("Patient added successfully!");
+    // Pass the ID via URL query parameter
+    window.location.href = `/Generate_New_Test?patientId=${docRef.id}`;
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error: " + error.message);
+  }
+});
+
+</script>  
+  <script>
+    window.calculateAge = function () {
+      const birthDate = new Date(document.getElementById("birthDate").value);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      document.getElementById("age").value = age;
+    };
+    document.getElementById("birthDate").addEventListener("change", window.calculateAge);
+  </script>
+</body>
+</html>

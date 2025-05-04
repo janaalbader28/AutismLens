@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Results</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .pageContainer {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 85%;
+            height: 85%;
+        }
+
+        .pageTitle {
+            font-size: 3vw;
+            font-weight: bold;
+            font-family: Abhaya Libre ExtraBold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .column {
+            height: fit-content !important;
+        }
+
+        .primaryBtn {
+            color: black !important;
+            background-color: #89B1EC !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .secondryBtn {
+            color: black !important;
+            background-color: #d7d7d7 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .resultsGrid {
+            overflow-y: scroll;
+            height: 400px !important;
+        }
+
+        .segment {
+            width: 99% !important;
+            margin-left: 5px !important;
+        }
+
+        .row {
+            padding: 2px !important;
+        }
+
+        .grid {
+            margin-top: 0px !important;
+            margin-bottom: 5px !important;
+        }
+
+        .circle {
+            border-radius: 180px;
+            height: 8vw;
+            width: 8vw;
+        }
+
+        .resultTitles {
+            font-weight: bold;
+        }
+
+        .resultDesc {
+            color: #8A8A8A;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui grid pageContainer">
+        <div class="three wide column"> <img class="ui centered large image" src="static/images/AutismLens_Logo.png"> </div>
+        <div class="ten wide column"> <p class="pageTitle">Previous Results</p> </div>
+        <div class="three wide column"></div>
+
+        
+        <div class="two wide column"></div>
+        <div class="twelve wide column resultsGrid">
+            <div class="ui grid">
+                <!-- Results will be dynamically loaded here -->
+            </div>
+        </div>
+        <div class="two wide column"></div>
+        <div class="sixteen wide column">
+            <a class="secondryBtn ui animated fade right floated button"  style="margin-right: 2vw;" tabindex="0" href = "/Doctor_Homepage">
+                <div class="visible content">Back</div>
+                <div class="hidden content"> <i class="arrow circle left icon"></i> </div>
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="/static/firebase-config.js"></script>
+    <script type="module">
+        import { db } from "/static/firebase-config.js";
+        import { getDocs, collection, query, where } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+        async function loadTestResults() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('patientId');  // Get the patientId from the URL
+
+            const resultsContainer = document.querySelector(".twelve.wide.column.resultsGrid .ui.grid");
+            resultsContainer.innerHTML = "";  
+
+            if (!patientId) {
+                resultsContainer.innerHTML = "<p>No patient selected.</p>";
+                return;
+            }
+
+            const testResultsQuery = query(collection(db, "TestResults"), where("patientID", "==", patientId));
+            const querySnapshot = await getDocs(testResultsQuery);
+
+            if (querySnapshot.empty) {
+                resultsContainer.innerHTML = "<p>No results found for this patient.</p>";
+                return;
+            }
+
+            querySnapshot.forEach((doc) => {
+                const resultData = doc.data();
+                const diagnosis = resultData.diagnosis || "Unknown Diagnosis";
+                const testDate = resultData.testDate || "Unknown Date";
+                const testAge = resultData.testAge || "Unknown Age";
+                const xaiImageUrl = resultData.xaiImageUrl || "https://via.placeholder.com/150";
+
+                const top3 = resultData.top3Classes || [];
+
+const resultRow = `
+    <div class="row">
+        <div class="ui raised segment grid">
+            <div class="three wide column">
+                <img class="ui circle image" src="${xaiImageUrl}">
+            </div>
+            <div class="six wide column">
+                <p class="resultTitles"> Result: </p>
+                <p class="resultDesc"><strong>Diagnosis:</strong> ${diagnosis}</p>
+                <p class="resultDesc"><strong>Top-3 Predictions:</strong> ${top3.join(', ')}</p>
+            </div>
+            <div class="four wide column">
+                <p class="resultTitles"> Date: </p>
+                <p class="resultDesc">${testDate}</p>
+            </div>
+            <div class="three wide column">
+                <p class="resultTitles"> Age: </p>
+                <p class="resultDesc">${testAge}</p>
+            </div>
+        </div>
+    </div>
+`;
+
+                resultsContainer.innerHTML += resultRow;
+            });
+        }
+
+        window.onload = loadTestResults;
+    </script>
+</body>
+</html>
+</html>

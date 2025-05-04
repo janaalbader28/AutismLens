@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="static/style2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="special-outer-container">
+    <div class="special-header">
+        <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo"> 
+        <h2>Doctor Profile</h2>
+    </div>
+    
+    <div class="special-container">
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="doctor-name">Doctor Name:</label>
+                <input type="text" id="doctor-name" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="specialization">Specialization:</label>
+                <input type="text" id="specialization" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="d-national-id">National ID:</label>
+                <input type="text" id="d-national-id" class="special-readonly" readonly>
+            </div>
+            <div class="special-form-group">
+                <label for="doctor-id">Doctor ID:</label>
+                <input type="text" id="doctor-id" class="special-readonly" readonly>
+            </div>
+        </div>
+        
+        <!-- Phone No and Password (Editable) -->
+        <div class="special-form-row">
+            <div class="special-form-group">
+                <label for="phone">Phone No:</label>
+                <input type="text" id="phone">
+            </div>
+
+            <div class="special-form-group" style="position: relative;">
+                <label for="password">Password:</label>
+                <input type="password" id="password">
+                <i id="toggleIcon" class="fa-solid fa-eye" style="position: absolute; right: 10px; top: 35px; cursor: pointer;"></i>
+            </div>
+        </div>
+        
+        <div class="special-button-group">
+            <a class="special-save-btn" onclick="updateProfile()">Save</a>
+            <a class="special-cancel-btn" type="button" href = "/Doctor_Homepage">Cancel</a>
+            <a class="special-logout-btn" href = "/">Logout</a>
+        </div>
+    </div>
+</div>
+
+<script type="module">
+    import { auth, db } from "/static/firebase-config.js";
+    import { onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+    import { doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+
+    let currentUser = null;
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUser = user;
+            console.log("User logged in:", user.uid);
+            await loadDoctorProfile(user.uid);
+        } else {
+            window.location.href = "/";
+        }
+    });
+
+    async function loadDoctorProfile(doctorID) {
+        const docRef = doc(db, "Doctors", doctorID);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById("doctor-name").value = `${data.firstName} ${data.MName} ${data.lastName}`;
+            document.getElementById("specialization").value = data.specialization || "";
+            document.getElementById("gender").value = data.gender || "";
+            document.getElementById("email").value = data.email || "";
+            document.getElementById("d-national-id").value = data.NID || "";
+            document.getElementById("doctor-id").value = doctorID;
+            document.getElementById("phone").value = data.phone || "";
+        } else {
+            alert("No profile data found.");
+        }
+    }
+
+    window.updateProfile = async function () {
+        if (!currentUser) {
+            alert("No user logged in.");
+            return;
+        }
+
+        const phone = document.getElementById("phone").value.trim();
+        const newPassword = document.getElementById("password").value.trim();
+        const docRef = doc(db, "Doctors", currentUser.uid);
+
+        try {
+            if (phone !== "" && !/^\d{10}$/.test(phone)) {
+                alert("Phone number must be exactly 10 digits.");
+                return;
+            }
+
+            if (phone !== "") {
+                await updateDoc(docRef, { phone: phone });
+            }
+
+            if (newPassword !== "") {
+                if (newPassword.length < 6) {
+                    alert("Password must be at least 6 characters long.");
+                    return;
+                }
+                await updatePassword(currentUser, newPassword);
+            }
+
+            alert("Profile updated successfully.");
+        } catch (error) {
+            alert("Error updating profile: " + error.message);
+        }
+    };
+
+
+    // Password show/hide toggle
+    const toggleIcon = document.getElementById("toggleIcon");
+    const passwordInput = document.getElementById("password");
+
+    toggleIcon.addEventListener("click", () => {
+        const isPasswordVisible = passwordInput.type === "text";
+        passwordInput.type = isPasswordVisible ? "password" : "text";
+        toggleIcon.classList.toggle("fa-eye");
+        toggleIcon.classList.toggle("fa-eye-slash");
+    });
+</script>
+
+</body>
+</html>

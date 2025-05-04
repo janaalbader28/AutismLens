@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Homepage</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .pageContainer {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 85%;
+            height: 85%;
+            flex-direction: column;
+            padding: 20px;
+
+        }
+
+        .pageTitle{
+            font-size: 3vw;
+            font-weight: bold;
+            font-family: Abhaya Libre ExtraBold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .scroll{
+            overflow-y: scroll;
+            height: 350px !important;
+        }
+
+        .segment{
+            width: 99% !important;
+            margin-left: 5px !important;
+        }
+
+        .primaryBtn{
+            color: black !important;
+            background-color: #89B1EC !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .removeBtn{
+            color: black !important;
+            background-color: #F2C3C4 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        
+        .specification{
+            color: #8A8A8A;
+            font-weight: bold;
+        }       
+        .row {
+            padding: 5px !important;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ui grid pageContainer">
+        <div class="three wide column"> <img class="ui centered large image" src="static/images/AutismLens_Logo.png"> </div>
+        <div class="ten wide column"> <p class="pageTitle">Admin Homepage</p> </div>
+        <div class="three wide column"></div>
+
+        <div class="two wide column"></div>
+        <div class="six wide column">
+            <a class="primaryBtn ui animated fade button" href="/Add_Doctor">
+                <div class="visible content">Add New Doctor</div>
+                <div class="hidden content"> <i class="user plus icon"></i> </div>
+            </a>
+        </div>
+        <div class="ui six wide column right aligned search">
+            <div class="ui icon input">
+                <input id="searchInput" class="prompt" type="text" placeholder="Search doctor by name..">
+                <i class="search icon"></i>
+            </div>
+        </div>
+        <div class="two wide column"></div>
+
+        <div class="two wide column"></div>
+        <div class="twelve wide column scroll" id="doctorsList">
+            <div class="ui grid">
+            <!-- Doctors will be dynamically inserted here -->
+            </div>
+        </div>
+        <div class="two wide column"></div>
+
+        <div class="sixteen wide column">
+            <a class="removeBtn ui animated fade right floated button"  style="margin-right: 2vw;" href = "/Admin_Login">
+                <div class="visible content">Logout</div>
+                <div class="hidden content"> <i class="sign out icon"></i> </div>
+            </a>
+       
+        </div>
+    </div>
+
+    <script type="module" src="/static/firebase-config.js"></script>
+
+
+    <script type="module">
+        import { auth, db } from "/static/firebase-config.js";
+        import { signOut } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { collection, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+    
+        async function loadDoctors() {
+            const doctorsContainer = document.querySelector(".twelve.wide.column.scroll .ui.grid");
+            doctorsContainer.innerHTML = ""; 
+    
+            const querySnapshot = await getDocs(collection(db, "Doctors"));
+    
+            if (querySnapshot.empty) {
+                doctorsContainer.innerHTML = "<p style='text-align:center;'>No doctors found.</p>";
+                return;
+            }
+    
+            querySnapshot.forEach((doc) => {
+                const doctorData = doc.data();
+                const doctorId = doc.id;
+                const fullName = ("Dr. "+ doctorData.firstName + " " + doctorData.lastName).trim() || "Unknown Doctor";
+                const specialization = doctorData.specialization || "No Specialization";
+    
+                const doctorRow = `
+                    <div class="row">
+                        <div class="ui raised segment" style="width: 100%;" data-doctor-id="${doctorId}">
+                            <div class="paragraph">
+                                <h2 class="medium line">${fullName}</h2>
+                                <div class="specification">${specialization}</div>
+    
+                                <!-- Delete Button -->
+                                <div class="removeBtn ui animated fade right floated button" tabindex="0" data-doctor-id="${doctorId}">
+                                    <div class="visible content">Remove</div>
+                                    <div class="hidden content"><i class="user times icon"></i></div>
+                                </div>
+    
+                                <!-- Update Button -->
+                                <div class="primaryBtn ui animated fade right floated button" tabindex="0" >
+                                    <a class="visible content" href="/Doctor_Info?doctorId=${doctorId}">Update</a>
+                                    <a class="hidden content"href="/Doctor_Info?doctorId=${doctorId}" ><i class="id card icon"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    
+                doctorsContainer.innerHTML += doctorRow;
+            });
+        }
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            const doctorsContainer = document.querySelector(".twelve.wide.column.scroll .ui.grid");
+    
+            doctorsContainer.addEventListener("click", function (event) {
+                if (event.target.closest('.removeBtn')) {
+                    const doctorId = event.target.closest('.removeBtn').getAttribute('data-doctor-id');
+                    if (doctorId) {
+                        showConfirmationDialog(doctorId);
+                    }
+                }
+            });
+        });
+    
+        function showConfirmationDialog(doctorId) {
+            const confirmation = confirm("Are you sure you want to remove this doctor?");
+            if (confirmation) {
+                removeDoctor(doctorId);
+            }
+        }
+    
+        // Remove doctor 
+async function removeDoctor(doctorId) {
+    try {
+        // Delete the doctor from Firestore - Doctors and Users collection
+        await deleteDoc(doc(db, "Doctors", doctorId));
+        await deleteDoc(doc(db, "Users", doctorId));
+
+        const doctorRow = document.querySelector(`[data-doctor-id="${doctorId}"]`);
+        if (doctorRow) {
+            doctorRow.remove();
+        }
+
+        alert("Doctor removed successfully!");
+    } catch (error) {
+        console.error("Error removing doctor: ", error);
+        alert("Failed to remove doctor.");
+    }
+}
+
+        // search 
+        const searchInput = document.querySelector("#searchInput");
+        const doctorsContainer = document.querySelector(".twelve.wide.column.scroll .ui.grid");
+    
+        searchInput.addEventListener("input", function () {
+            const searchText = searchInput.value.toLowerCase();
+            const doctorRows = doctorsContainer.querySelectorAll(".row");
+    
+            doctorRows.forEach(row => {
+                const doctorName = row.querySelector("h2").innerText.toLowerCase();
+                if (doctorName.includes(searchText)) {
+                    row.style.display = "flex";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        });
+    
+        loadDoctors();
+    </script>
+    
+</body>
+</html>

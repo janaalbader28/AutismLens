@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="static/images/favicon.png">
+    <link rel="stylesheet" href="static/style2.css">
+    <style>
+        .upload-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .upload-box input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .previewImage{
+            display: block;
+        }
+        .center-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px; /* optional spacing */
+}
+    </style>
+</head>
+<body>
+    <div class="special-outer-container">
+        <div class="special-header">
+            <img src="static/images/logo.png" alt="AutismLens Logo" class="special-logo">
+            <h2>Upload Image</h2>
+        </div>
+        
+        <div class="special-container">
+            <div class="content-wrapper">
+
+                <div class="upload-section">
+                    <form action="/upload_image/" method="post" enctype="multipart/form-data">
+                    <div class="upload-box" >
+                        <img id="previewImage" src="static\images\profile.png" alt="Image Preview">
+                        <input type="file" id="fileInput" name="file" accept="image/*" required>
+                    </div>
+                    <div class="center-button">
+                        <button type="submit">Upload</button>
+                    </div>
+                </form>
+                </div>   
+
+                <div class="form-section">
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>First Name:</label>
+                            <input type="text" id="first-name" disabled>
+                        </div>
+                        <div class="special-form-group">
+                            <label>Last Name:</label>
+                            <input type="text" id="last-name" disabled>
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label for="gender">Gender:</label>
+                            <input type="text" id="gender" class="special-readonly" readonly>
+                        </div>
+                        <div class="special-form-group">
+                            <label>National ID (NID):</label>
+                            <input type="text" id="national-id" disabled>
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>Age:</label>
+                            <input type="text" class="special-readonly" id="age" disabled>
+                        </div>
+                        <div class="special-form-group">
+                            <label>Birth Date:</label>
+                            <input type="date" id="birth-date" disabled>
+                        </div>
+                    </div>
+                    <div class="special-form-row">
+                        <div class="special-form-group">
+                            <label>Phone No.:</label>
+                            <input type="text" id="phone" disabled>
+                        </div>
+                        <div class="special-form-group">
+                            <label>Additional Phone No.:</label>
+                            <input type="text" id="additional-phone" disabled>
+                        </div>
+                    </div>
+                    <div class="special-button-group">
+                        <a class="special-cancel-btn" type="button" href = "/Doctor_Homepage">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <script type="module">
+    import { db, auth } from '/static/firebase-config.js';
+    import { doc, getDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js';
+    import { updateDoc } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+
+
+    let doctorID = null;
+    const patientId = new URLSearchParams(window.location.search).get('patientId');
+    const file = document.getElementById("fileInput").files[0];
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            doctorID = user.uid;
+            loadPatientInfo();
+        } else {
+            window.location.href = "/doctor_login";
+        }
+    });
+
+    async function loadPatientInfo() {
+        if (!patientId) {
+            alert('Missing patient ID!');
+            return;
+        }
+
+        const docRef = doc(db, 'Patients', patientId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('first-name').value = data.firstName;
+            document.getElementById('last-name').value = data.lastName;
+            document.getElementById('gender').value = data.gender;
+            document.getElementById('national-id').value = data.NID;
+            document.getElementById('age').value = calculateAge(data.birthday);
+            document.getElementById('birth-date').value = data.birthday;
+            document.getElementById('phone').value = data.phone;
+            document.getElementById('additional-phone').value = data.phone2;
+        }
+    }
+
+    function calculateAge(birthDate) {
+        const birth = new Date(birthDate);
+        const today = new Date();
+        let age = today.getFullYear() - birth.getFullYear();
+        const monthDiff = today.getMonth() - birth.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+        return age;
+    }
+
+
+
+</script>
+<script>
+    document.getElementById('fileInput').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('previewImage');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+<script>
+    document.querySelector("form").addEventListener("submit", function (e) {
+        const patientId = new URLSearchParams(window.location.search).get("patientId");
+        if (patientId) {
+            this.action = `/upload_image/?patientId=${encodeURIComponent(patientId)}`;
+        }
+    });
+</script>
+
+
+    
+</body>
+</html>

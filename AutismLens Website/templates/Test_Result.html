@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="/static/images/favicon.png"> 
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .pageContainer {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 85%;
+            height: 85%;
+        }
+
+        .pageTitle {
+            font-size: 3vw;
+            font-weight: bold;
+            font-family: Abhaya Libre ExtraBold;
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        .column {
+            height: fit-content !important;
+        }
+
+        .primaryBtn {
+            color: black !important;
+            background-color: #89B1EC !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .secondryBtn {
+            color: black !important;
+            background-color: #d7d7d7 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .removeBtn {
+            color: black !important;
+            background-color: #F2C3C4 !important;
+            box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .segment {
+            width: 99% !important;
+            margin-left: 5px !important;
+            /* height: 30.75vw !important; */
+        }
+
+        .row {
+            padding: 2px !important;
+        }
+
+        .grid {
+            margin-top: 0px !important;
+            margin-bottom: 5px !important;
+        }
+
+        .circle {
+            border-radius: 180px;
+            height: 8vw;
+            width: 8vw;
+        }
+
+        .resultTitles {
+            font-weight: bold;
+        }
+
+        .resultDesc {
+            color: #8A8A8A;
+        }
+
+        .descBox {
+            display: block;
+            background: #e8e8e8;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 100%;
+            /* height: 350px; */
+            padding: 3% 3%;
+        }
+        .pageHeader img{
+            width: 8vw;
+        }
+
+        
+.special-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.special-logo {
+    max-width: 10%; 
+    height: auto;
+    margin-right: 30%; /* Space between logo and title */
+    padding: 10px;
+}
+
+h2 {
+    font-family: "Abhaya Libre ExtraBold", sans-serif;
+    text-align: center;
+    color: #333;
+    margin: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="ui grid pageContainer">
+
+        <div class="special-outer-container">
+            <div class="special-header">
+                <img src="/static/images/logo.png" alt="AutismLens Logo" class="special-logo">
+                <div class="title-container">
+                    <h2>Test Result</h2>
+                </div>            </div>
+        <div class="three wide column"></div>
+
+        <div class="two wide column"></div>
+        <div class="twelve wide column resultHight">
+            <div class="ui segment">
+                <div class="ui two column very relaxed grid">
+                    <!-- Patient Image -->
+                    <div class="column" style="padding-top: 5%;">
+                        <div class="gradcam-preview">
+                            <img id="gradcam-image" class="ui centered medium circle image" src="data:image/png;base64,{{ gradcam_image }}" alt="GradCAM Heatmap">
+                        </div>
+                    </div>
+
+                    <!-- Result Details -->
+                    <div class="column">
+                        <p class="resultTitles">Result:</p>
+                        <div class="descBox">
+                            <div class="result-container">
+                                <p><strong>Dignosis:</strong> {{ predicted_class_name }}</p>
+
+                                <p><strong>Top 3 Predictions:</strong></p>
+                                <ul>
+                                    {% for class_name, confidence in zip(top3_classes, top3_confidence) %}
+                                    <li>{{ class_name }} - Confidence: {{ '{:.2f}'.format(confidence * 100) }}%</li>
+                                    {% endfor %}
+                                </ul>   
+                                <p><strong>Justification:</strong> {{ justification }}</p>
+                                <p><strong>Explanation:</strong> {{ explanation }}</p> <!-- Added Explanation -->
+                            </div>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ui vertical divider"></div>
+            </div>
+        </div>
+        <div class="two wide column"></div>
+
+        <div class="sixteen wide column">
+            <a class="secondryBtn ui animated fade right floated button" style="margin-right: 2vw;" tabindex="0" href="/Doctor_Homepage">
+                <div class="visible content">Back</div>
+                <div class="hidden content"><i class="arrow circle left icon"></i></div>
+            </a>
+        </div>
+    </div>
+
+    <script type="module" src="/static/firebase-config.js"></script>
+  
+    <script type="module">
+        import { db } from '/static/firebase-config.js';
+        import { doc, getDoc, addDoc, collection } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+    
+        const patientId = new URLSearchParams(window.location.search).get('patientId');
+    
+        function getTextContent(selector) {
+            const el = document.querySelector(selector);
+            return el ? el.textContent.trim() : '';
+        }
+    
+        async function saveTestResult() {
+            if (!patientId) {
+                console.error("No patientId provided.");
+                return;
+            }
+    
+            const diagnosisText = getTextContent('.descBox p:nth-child(1)').replace('Dignosis: ', '');
+            function extractTextByPrefix(prefix) {
+    const paragraphs = document.querySelectorAll('.descBox p');
+    for (const p of paragraphs) {
+        if (p.textContent.startsWith(prefix)) {
+            return p.textContent.replace(prefix, '').trim();
+        }
+    }
+    return '';
+}
+
+const justificationText = extractTextByPrefix('Justification:');
+const explanationText = extractTextByPrefix('Explanation:');
+
+    
+            // Get top 3 predictions from the <ul>
+            const top3ListItems = document.querySelectorAll('.descBox ul li');
+            const top3 = Array.from(top3ListItems).map(li => li.textContent.trim());
+    
+            // Use current date as test date
+            const testDate = new Date();
+            const testDateString = testDate.toISOString().split('T')[0];
+    
+            try {
+                // Get birthday from Patients collection
+                const patientRef = doc(db, "Patients", patientId);
+                const patientSnap = await getDoc(patientRef);
+    
+                if (!patientSnap.exists()) {
+                    console.error("No patient data found.");
+                    return;
+                }
+    
+                const patientData = patientSnap.data();
+                const birthday = new Date(patientData.birthday);
+                const ageDiffMs = testDate - birthday;
+                const testAge = Math.floor(ageDiffMs / (1000 * 60 * 60 * 24 * 365.25));
+
+                // Upload image to Cloudinary
+const gradcamImgElement = document.getElementById('gradcam-image');
+const gradcamBase64 = gradcamImgElement.src;
+let cloudinaryImageUrl = '';
+
+if (gradcamBase64.startsWith('data:image')) {
+    const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dkv2xo8yn/image/upload';
+    const cloudinaryPreset = 'autismlens_preset';
+
+    const formData = new FormData();
+    // Convert base64 to Blob to avoid encoding issues
+    const blob = await fetch(gradcamBase64).then(res => res.blob());
+    formData.append('file', blob);
+    formData.append('upload_preset', cloudinaryPreset);
+
+    try {
+        const response = await fetch(cloudinaryUploadUrl, {
+            method: 'POST',
+            body: formData
+        });
+
+        const responseData = await response.json();
+        console.log(responseData);  // Log the response from Cloudinary
+        if (!response.ok) {
+            throw new Error(`Cloudinary upload failed: ${responseData.error.message}`);
+        }
+
+        cloudinaryImageUrl = responseData.secure_url;
+    } catch (uploadError) {
+        console.error("Cloudinary upload error:", uploadError);
+        return;
+    }
+}
+
+    
+                // Save to TestResults
+                await addDoc(collection(db, "TestResults"), {
+                    patientID: patientId,
+                    testDate: testDateString,
+                    testAge: testAge,
+                    diagnosis: diagnosisText,
+                    top3Classes: top3,
+                    justification: justificationText,
+                    explanation: explanationText,
+                    xaiImageUrl: cloudinaryImageUrl 
+                });
+    
+                console.log("Test result saved successfully.");
+            } catch (error) {
+                console.error("Error saving test result:", error);
+            }
+        }
+    
+        // Call the function automatically on load
+        window.addEventListener('load', saveTestResult);
+
+    </script>
+    
+     
+    
+</body>
+</html>
+
+

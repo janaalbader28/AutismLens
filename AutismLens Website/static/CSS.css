@@ -1,0 +1,130 @@
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #1e3c72, #6a93cb);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .White_container {
+        display: flex;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 85vw;
+        height: 80vh;
+    }
+
+    /* Login pages */
+            .left-panel {
+                background: white;
+                width: 50vw;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+                padding: 5%;
+            }
+
+            .right-panel {
+                width: 50vw;
+                padding: 10%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                align-content: center;
+            }
+
+            .divider {
+                position: absolute;
+                left: 50vw;
+                top: 15%;
+                bottom: 15%;
+                width: 1px;
+                background: #ccc;
+                transform: translateX(-50%);
+            }
+
+            .login_title {
+                margin-bottom: 20px;
+                font-size: 3.5vw;
+                color: #1e3c72;
+                color: #0B0E2E;
+                font-family: 'Abhaya Libre ExtraBold';
+            }
+            
+            .logo {
+                width: 20vw;
+            }
+
+            .inputText {
+                width: 25vw;
+                padding: 10px;
+                margin: 0.694vw 0;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                align-items:center;
+                justify-content: center;
+            }
+
+            #toggleIcon {
+                position: absolute;
+                right: 1.04vw;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+            }
+
+            #keeplogin{
+                text-align: start;
+            }
+                            
+            .login_label{
+                color: #606060;
+                font-family: 'Abhaya Libre ExtraBold';
+                text-align: start;
+            }
+
+            .login_submit_doctor, .login_submit_admin, .ForgetPass_submit {
+                background: #8AB2ED;
+                color: rgb(0, 0, 0);
+                border: none;
+                font-family: 'Abhaya Libre ExtraBold';
+                font-size: 1.5vw;
+                padding: 0.5vw;
+                width: 15vw;
+                height: 4.37vh;
+                border-radius: 0.35vw;
+                cursor: pointer;
+                margin-top: 1.11vh;
+                text-align: center;
+                margin: 1.11vh auto;
+                display: block;
+            }
+                            
+            button:hover {
+                background: #1e3c72;
+                color: rgb(255, 255, 255);
+            }
+                            
+            a {
+                display: block;
+                margin-top: 1.66vh;
+                text-decoration: none;
+                font-family: 'Abhaya Libre ExtraBold';
+                align-items: end;
+                color: #1e3c72;
+                font-size: 1.25vw;
+            }
+                            
+            a:hover {
+                text-decoration: underline;
+            }
+
+    /* homepages */
+
