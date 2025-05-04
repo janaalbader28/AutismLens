@@ -26,7 +26,6 @@ Patients (collection)
  │    ├── birthday: "1995-06-10"
  │    ├── phone: "987654321"
  │    ├── phone2: "123456789"
- │    ├── imageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
  
  TestResults (Collection)
  ├── resultID (document)
@@ -34,7 +33,11 @@ Patients (collection)
  │    ├── xaiImageUrl: "https://res.cloudinary.com/dkv2xo8yn/image/upload/v1742784259/dw262hjkv8ifsnin5fkj.jpg"
  │    ├── testDate: "2025-03-24"
  │    ├── testAge: "9"
+ │    ├── explanation: ""
+ │    ├── justification: ""
+ │    ├── top3Classes: ""
  │    ├── patientID: "uLm1L1YShRY6hqYNkcdW"
+
 
 Users (collection) 
  ├── userID (document)
