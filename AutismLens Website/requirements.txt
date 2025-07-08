@@ -3,3 +3,5 @@ uvicorn
 firebase-admin
 jinja2
 python-multipart
+torch
+torchvision
