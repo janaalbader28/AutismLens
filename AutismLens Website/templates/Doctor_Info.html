@@ -101,7 +101,6 @@
                 document.getElementById('national-id').value = doctorData.NID || '';
                 document.getElementById('doctor-id').value = doctorId; 
                 document.getElementById('phone').value = doctorData.phone || '';
-                // Password field is set with placeholder '********'
             } else {
                 alert('No doctor data found!');
             }
@@ -110,7 +109,6 @@
         // Load doctor info
         loadDoctorInfo();
 
-        // Save the doctor info 
         async function saveDoctorInfo() {
             console.log('saveDoctorInfo function is loaded and called!');
 
@@ -119,7 +117,6 @@
             const email = document.getElementById('email').value;
             const doctorName = document.getElementById('doctor-name').value.trim();
 
-            // Split the doctor name into first, middle, and last names
             const nameParts = doctorName.split(' ');
 
             if (nameParts.length < 2) {
@@ -131,20 +128,17 @@
             const lastName = nameParts[nameParts.length - 1];
             const middleName = nameParts.length > 2 ? nameParts.slice(1, -1).join(' ') : '';
 
-            // Validation for specialization
             if (!specialization) {
                 alert('Please enter the specialization field');
                 return;
             }
 
-            // Validation for email format
             const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (!email || !emailRegex.test(email)) {
                 alert('Please enter a valid email address');
                 return;
             }
 
-            // Save the updated doctor information 
             const docRef = doc(db, 'Doctors', doctorId);
 
             try {
@@ -166,9 +160,8 @@
             }
         }
 
-        // Fix: Attach saveDoctorInfo and prevent default navigation
         document.querySelector('.special-save-btn').addEventListener('click', (e) => {
-            e.preventDefault(); // ✨ This line stops the <a> tag default action
+            e.preventDefault(); 
             saveDoctorInfo();
         });
     });
@@ -178,3 +171,4 @@
 
 </body>
 </html>
+
