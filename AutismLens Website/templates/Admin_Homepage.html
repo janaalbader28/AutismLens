@@ -100,7 +100,6 @@
         <div class="two wide column"></div>
         <div class="twelve wide column scroll" id="doctorsList">
             <div class="ui grid">
-            <!-- Doctors will be dynamically inserted here -->
             </div>
         </div>
         <div class="two wide column"></div>
@@ -189,7 +188,6 @@
         // Remove doctor 
 async function removeDoctor(doctorId) {
     try {
-        // Delete the doctor from Firestore - Doctors and Users collection
         await deleteDoc(doc(db, "Doctors", doctorId));
         await deleteDoc(doc(db, "Users", doctorId));
 
@@ -228,3 +226,4 @@ async function removeDoctor(doctorId) {
     
 </body>
 </html>
+
