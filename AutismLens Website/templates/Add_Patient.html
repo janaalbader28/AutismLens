@@ -63,7 +63,6 @@
       font-weight: bold;
       text-decoration: none;
   }
-    /* ruba.css - Updated Styles for Upload Form */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom, #1e3c72, #6a93cb);
@@ -98,7 +97,7 @@ body {
 .special-logo {
   width: 8vw;
 
-    margin-right: 30%; /* Space between logo and title */
+    margin-right: 30%; 
 }
 
 h2 {
@@ -108,7 +107,6 @@ h2 {
     margin: 0;
 }
 
-/* Container */
 .special-container {
     width: 100%;
     padding: 30px;
@@ -120,7 +118,6 @@ h2 {
     align-items: center;
 }
 
-/* Upload Section */
 .upload-section {
     display: flex;
     flex-direction: column;
@@ -145,7 +142,6 @@ h2 {
     height: 50px;
 }
 
-/* Form Layout */
 .special-form-row {
     display: flex;
     justify-content: space-between;
@@ -189,13 +185,11 @@ select:hover {
     border-color: #4A90E2;
 }
 
-/* Readonly Input */
 .special-readonly {
     background-color: #f0f0f0;
     border: none;
 }
 
-/* Button Group */
 .special-button-group {
     display: flex;
     justify-content: flex-end;
@@ -212,7 +206,6 @@ button {
     font-weight: bold;
 }
 
-/* Button Styles */
 .special-save-btn {
     background-color: #8AB2ED;
     color: black;
@@ -336,10 +329,10 @@ button {
     });
   
     document.getElementById("patientForm").addEventListener("submit", async (event) => {
-  event.preventDefault(); // prevent form's default submission
+  event.preventDefault(); 
 
   const form = event.target;
-  const formData = new FormData(form); // includes the file
+  const formData = new FormData(form); 
   const file = formData.get("file");
 
   const firstName = document.getElementById("firstName").value.trim();
@@ -372,10 +365,9 @@ button {
 
     if (!querySnapshot.empty) {
       alert("A patient with this National ID already exists.");
-      return; // Exit early if patient already exists
+      return; 
     }
 
-    // If NID is unique, add the new patient
     const docRef = await addDoc(collection(db, "Patients"), {
       firstName,
       lastName,
@@ -387,7 +379,6 @@ button {
     });
 
     alert("Patient added successfully!");
-    // Pass the ID via URL query parameter
     window.location.href = `/Generate_New_Test?patientId=${docRef.id}`;
   } catch (error) {
     console.error("Error:", error);
@@ -413,3 +404,4 @@ button {
   </script>
 </body>
 </html>
+
