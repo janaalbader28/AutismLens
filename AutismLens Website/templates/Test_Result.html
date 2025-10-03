@@ -65,7 +65,6 @@
         .segment {
             width: 99% !important;
             margin-left: 5px !important;
-            /* height: 30.75vw !important; */
         }
 
         .row {
@@ -98,7 +97,6 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             width: 100%;
-            /* height: 350px; */
             padding: 3% 3%;
         }
         .pageHeader img{
@@ -116,7 +114,7 @@
 .special-logo {
     max-width: 10%; 
     height: auto;
-    margin-right: 30%; /* Space between logo and title */
+    margin-right: 30%;
     padding: 10px;
 }
 
@@ -165,7 +163,7 @@ h2 {
                                     {% endfor %}
                                 </ul>   
                                 <p><strong>Justification:</strong> {{ justification }}</p>
-                                <p><strong>Explanation:</strong> {{ explanation }}</p> <!-- Added Explanation -->
+                                <p><strong>Explanation:</strong> {{ explanation }}</p> 
                             </div>
                             
 
@@ -248,11 +246,10 @@ const gradcamBase64 = gradcamImgElement.src;
 let cloudinaryImageUrl = '';
 
 if (gradcamBase64.startsWith('data:image')) {
-    const cloudinaryUploadUrl = 'https://api.cloudinary.com/v1_1/dkv2xo8yn/image/upload';
+const cloudinaryUploadUrl = 'YOUR_CLOUDINARY_UPLOAD_URL';
     const cloudinaryPreset = 'autismlens_preset';
 
     const formData = new FormData();
-    // Convert base64 to Blob to avoid encoding issues
     const blob = await fetch(gradcamBase64).then(res => res.blob());
     formData.append('file', blob);
     formData.append('upload_preset', cloudinaryPreset);
@@ -264,7 +261,7 @@ if (gradcamBase64.startsWith('data:image')) {
         });
 
         const responseData = await response.json();
-        console.log(responseData);  // Log the response from Cloudinary
+        console.log(responseData);  /
         if (!response.ok) {
             throw new Error(`Cloudinary upload failed: ${responseData.error.message}`);
         }
@@ -295,7 +292,6 @@ if (gradcamBase64.startsWith('data:image')) {
             }
         }
     
-        // Call the function automatically on load
         window.addEventListener('load', saveTestResult);
 
     </script>
@@ -304,5 +300,6 @@ if (gradcamBase64.startsWith('data:image')) {
     
 </body>
 </html>
+
 
 
