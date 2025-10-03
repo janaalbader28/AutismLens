@@ -2,7 +2,6 @@
 
 **AutismLens** is a deep learning-based project focused on improving the early diagnosis of Autism Spectrum Disorder (ASD) using facial image analysis. This project integrates advanced CNN architectures, particularly **ConvNeXt**, with interpretability tools like **Grad-CAM** to provide accurate and explainable predictions. The system is designed to assist clinicians and researchers in identifying ASD-related patterns through facial features.
 
----
 
 ## 🎯 Goals
 
@@ -10,7 +9,7 @@
 - Improve diagnostic accuracy and speed using advanced AI.
 - Provide a simple and interpretable tool for researchers and clinicians.
 
----
+
 ## 🧩 How It Works
 
 1. Upload a facial image of a child.
@@ -18,7 +17,7 @@
 3. Grad-CAM highlights key facial features used in the prediction for better interpretability.
 4. Results are displayed on the web  interface.
 
----
+
 
 
 ## 📂 Datasets Used
@@ -36,7 +35,6 @@
    - Fragile X Syndrome  
    - Williams-Beuren Syndrome  
    - Cerebral Palsy Disorder
----
 
 ## 📂 Model Weights
 
@@ -44,7 +42,7 @@ The pre-trained model weights for **AutismLens** can be accessed and downloaded 
 
 📥 [Download Model Weights](https://drive.google.com/drive/folders/1xmJkqmGAzoQ5ht7p5mWyXEBKwUGTYfjW?usp=drive_link)
 
----
+
 ## 📊 Model Performance
 
 | Model                 | Accuracy (%) | Precision (%) | Recall (%) | F1-Score (%) |
@@ -55,7 +53,7 @@ The pre-trained model weights for **AutismLens** can be accessed and downloaded 
 | EfficientNet_b0          | 87%          | 87%            | 87%         | 87%            |
 | ResNet50                 | 89%          | 89%            | 89%         | 89%            |
 
----
+
 
 ## 💡 Key Technologies (Tools)
 
@@ -69,7 +67,7 @@ The pre-trained model weights for **AutismLens** can be accessed and downloaded 
 - **Visual Studio Code** – used for website development  
 
 
----
+
 
 ## ⚙️ FastAPI Integration Steps
 
@@ -85,7 +83,7 @@ Then try activating again:
 
 4. pip install fastapi uvicorn torch torchvision pydantic requests
 5. uvicorn main:main --reload
----
+
 ## 👩‍💻 Developers
 
 - **Jumana Khawaji**  
