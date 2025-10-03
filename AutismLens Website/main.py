@@ -17,13 +17,11 @@ import base64
 from pydantic import BaseModel
 from typing import List
 
-# Define device globally
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # FastAPI app initialization
 app = FastAPI()
 
-# Set up template rendering and static file serving
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -32,7 +30,7 @@ UPLOAD_FOLDER = os.path.join(os.getcwd(), "static", "uploaded_images")
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# 1. Create base model
+# 1. base model
 model = convnext_tiny(weights=None)
 
 # 2. Replace classifier BEFORE loading weights
@@ -40,10 +38,10 @@ model.classifier[2] = nn.Sequential(
     nn.Linear(model.classifier[2].in_features, 512),
     nn.GELU(),
     nn.Dropout(p=0.5),
-    nn.Linear(512, 3)  # Adjust 3 to your number of classes
+    nn.Linear(512, 3)  
 )
 
-# 3. Load your saved weights
+# 3. Load saved weights
 model.load_state_dict(torch.load('autism_model_weights.pth', map_location=device))
 
 # 4. Set model to evaluation mode
@@ -84,7 +82,7 @@ def register_hooks(model):
     def save_gradient(module, grad_input, grad_output):
         gradients.append(grad_output[0])
 
-    # Target last features[-1] layer (better for ConvNeXt)
+    # Target last features[-1] layer 
     try:
         target_layer = model.features[-1]
     except AttributeError:
@@ -262,7 +260,7 @@ async def result(request: Request, image_url: str):
         "top3_classes": top3_classes,
         "top3_confidence": top3_confidences,
         "justification": justification,
-        "explanation": explanation,  # Adding explanation here
+        "explanation": explanation,  
         "zip": zip,
         "gradcam_image": gradcam_encoded,
         "predicted_class_name": predicted_class_name
@@ -272,3 +270,4 @@ async def result(request: Request, image_url: str):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
