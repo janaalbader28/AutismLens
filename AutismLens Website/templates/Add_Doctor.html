@@ -104,7 +104,7 @@
 
     // Doctor ID generator
     function generateDoctorId() {
-      return 'DOC-' + Math.floor(1000 + Math.random() * 9000); // example: DOC-4583
+      return 'DOC-' + Math.floor(1000 + Math.random() * 9000); 
     }
 
     document.addEventListener("DOMContentLoaded", () => {
@@ -112,7 +112,6 @@
       document.getElementById("doctorid").value = generateDoctorId();
     });
 
-    // Eye toggle
     const toggleIcon = document.getElementById("toggleIcon");
     const passwordInput = document.getElementById("password");
 
@@ -176,7 +175,6 @@
           password 
         });
 
-        // Add minimal info to "Users" collection
         await setDoc(doc(db, "Users", user.uid), {
           email,
           role: "doctor",
@@ -193,3 +191,4 @@
   </script>
 </body>
 </html>
+
