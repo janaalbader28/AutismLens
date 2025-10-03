@@ -117,7 +117,6 @@
         <div class="two wide column"></div>
         <div class="twelve wide column scroll">
             <div class="ui grid">
-                <!-- Patients will be dynamically loaded here -->
             </div>
         </div>
         <div class="two wide column"></div>
@@ -193,7 +192,6 @@
             }
         });
 
-        // Search 
         document.addEventListener("DOMContentLoaded", function () {
             const searchInput = document.querySelector(".search input");
             const patientsContainer = document.querySelector(".twelve.wide.column.scroll .ui.grid");
@@ -212,7 +210,6 @@
                 });
             });
 
-            // Remove button
             patientsContainer.addEventListener("click", function (event) {
                 if (event.target.closest('.removeBtn')) {
                     const patientId = event.target.closest('.removeBtn').getAttribute('data-patient-id');
@@ -235,7 +232,6 @@
                 // Delete the patient from Firestore
                 await deleteDoc(doc(db, "Patients", patientId));
 
-                // Remove the patient from the UI
                 const patientRow = document.querySelector(`[data-patient-id="${patientId}"]`);
                 if (patientRow) {
                     patientRow.remove();
@@ -251,3 +247,4 @@
     </script>
 </body>
 </html>
+
