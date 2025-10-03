@@ -62,7 +62,6 @@
         
         <div class="special-button-group" style="display: flex; justify-content: space-between;">
             <div>
-                <!-- UPDATED BUTTON HERE -->
                 <button class="special-generate-btn" onclick="generateNewTest()">Generate New Test</button>
             </div>
             <div>
@@ -77,7 +76,6 @@
     import { db } from '/static/firebase-config.js';
     import { doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
 
-    // Extract the patientId from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const patientId = urlParams.get('patientId'); 
 
@@ -183,3 +181,4 @@
 
 </body>
 </html>
+
