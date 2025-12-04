@@ -40,7 +40,7 @@
 
 The pre-trained model weights for **AutismLens** can be accessed and downloaded from the following link:
 
-📥 [Download Model Weights](https://drive.google.com/drive/folders/1xmJkqmGAzoQ5ht7p5mWyXEBKwUGTYfjW?usp=drive_link)
+📥 [Download Model Weights](https://drive.google.com/file/d/1YLy1l3T-izOc73Q1h7Q-pGnm-aI9nLb9/view?usp=sharing)
 
 
 ## 📊 Model Performance
