@@ -17,6 +17,8 @@
 3. Grad-CAM highlights key facial features used in the prediction for better interpretability.
 4. Results are displayed on the web  interface.
 
+## 📽 Demo
+[![Watch the demo](assets/demo-thumb.png)](https://drive.google.com/file/d/1mtY3ON_Wd1fCKGEAreW78YEFNkBRxogu/view?usp=sharing)
 
 
 
