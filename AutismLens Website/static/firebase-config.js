@@ -4,14 +4,14 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.5.0/firebase
 import { getStorage } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
 
 
- const firebaseConfig = {
-     apiKey: "YOUR_API_KEY",
-     authDomain: "YOUR_AUTH_DOMAIN",
-     projectId: "YOUR_PROJECT_ID",
-     storageBucket: "YOUR_BUCKET",
-     messagingSenderId: "YOUR_MSG_ID",
-     appId: "YOUR_APP_ID"
- };
+const firebaseConfig = {
+    apiKey: "AIzaSyDre2xyScQZen3FpnuuGgV-WQ92EO1oyag",
+    authDomain: "autismlens-267e5.firebaseapp.com",
+    projectId: "autismlens-267e5",
+    storageBucket: "autismlens-267e5.firebasestorage.app",
+    messagingSenderId: "44492084243",
+    appId: "1:44492084243:web:cd92a7f4bc8db5680d9be6"
+  };
 
   
 // Initialize Firebase
